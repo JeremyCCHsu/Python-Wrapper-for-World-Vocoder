@@ -35,12 +35,16 @@ For more information, please visit Morise's Github repository:<br/>
 
 
 ## Installation
-Python 2.7.6 on Linux Ubuntu 14.04 <br/>
+Linux Ubuntu 14.04 <br.>
+Python 2.7.6 on <br/>
 Cython 0.24 is required
 
-**If you just want to try out some experiments:**
+**Prerequisite**: <br/>
+Please `git clone` Morise's World (C++ version) first <br/>
+   https://github.com/mmorise/World
 
-1. Clone this repository
+**If you just want to try out some experiments:** <br/>
+1. Clone this repository, and move the files to the directory of World.
 
 2. Execute <br/>
   `python setup.py build_ext --inplace` <br/>
@@ -73,14 +77,14 @@ Hint:
 ## Note:
 1. This wrapper is an updated version of sotelo's "world.py"<br/>
   https://github.com/sotelo/world.py
-2. No modification was made to the original C++ codes (World v0.2.0_6); therefore, you can also clone Morise's repository and then copy the following files into it.
-  - pyworld.pyx
-  - setup.py
-  - demo.py (optional)
-2. These source codes are released under the modified-BSD license.
-3. There is no patent in all algorithms in WORLD.<br/>
-4. This is a prototype version, and there may be bugs.<br/>
-   (according to Morise's repository)
+<!--2. No modification was made to the original C++ codes (World v0.2.0_6); therefore, you can also clone Morise's repository and then copy the following files into it.-->
+<!--  - pyworld.pyx-->
+<!--  - setup.py-->
+<!--  - demo.py (optional)-->
+<!--2. These source codes are released under the modified-BSD license.-->
+<!--3. There is no patent in all algorithms in WORLD.<br/>-->
+<!--4. This is a prototype version, and there may be bugs.<br/>-->
+<!--   (according to Morise's repository)-->
 
 ## TODO List
   - [ ] Realtime synthesizer
