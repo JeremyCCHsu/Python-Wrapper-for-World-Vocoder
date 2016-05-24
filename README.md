@@ -1,5 +1,19 @@
 #PyWorldVocoder<br/>A Python wrapper for World Vocoder
 
+Morise's World Vocoder is a fast and high-quality vocoder.
+World Vocoder parameterizes speech into three components:
+  1. Pitch (fundamental frequency, F0) contour
+  2. smoothed spectrogram
+  3. aperiodicity
+
+It can also resynthesize speech using these features.
+
+For more information, please visit Morise's Github repository:<br/>
+  https://github.com/mmorise/World <br/>
+  And the official website of World Vocoder:<br/>
+  http://ml.cs.yamanashi.ac.jp/world/english/
+
+
 ##APIs
 
 ###Vocoder Functions
@@ -20,22 +34,8 @@ y = pw.synthesize(f0, sp, ap, fs, pyDioOpt.option['frame_period'])
 f0, sp, ap, pyDioOpt = pw.wav2world(x, fs)
 ```
 
-Morise's World Vocoder is a fast and high-quality vocoder.
-World Vocoder parameterizes speech into three components:
-  1. Pitch (fundamental frequency, F0) contour
-  2. smoothed spectrogram
-  3. aperiodicity
-
-It can also resynthesize speech using these features.
-
-For more information, please visit Morise's Github repository:<br/>
-  https://github.com/mmorise/World <br/>
-  And the official website of World Vocoder:<br/>
-  http://ml.cs.yamanashi.ac.jp/world/english/
-
-
 ## Installation
-Linux Ubuntu 14.04 <br.>
+Linux Ubuntu 14.04 <br/>
 Python 2.7.6 on <br/>
 Cython 0.24 is required
 
@@ -71,21 +71,13 @@ Hint:
    (I failed to build it on Cython 0.20.1post0)<br/>
    It'll require you to download Cython form http://cython.org/ <br/>
    Unzip it, and `python setup.py install` it.<br/>
-   (I tried `pip install Cython` but the upgrade didn't seem correct)
+   (I tried `pip install Cython` but the upgrade didn't seem correct)<br/>
+   (Again, add `--user` if you don't have root access.)
 
 
 ## Note:
 1. This wrapper is an updated version of sotelo's "world.py"<br/>
   https://github.com/sotelo/world.py
-<!--2. No modification was made to the original C++ codes (World v0.2.0_6); therefore, you can also clone Morise's repository and then copy the following files into it.-->
-<!--  - pyworld.pyx-->
-<!--  - setup.py-->
-<!--  - demo.py (optional)-->
-<!--2. These source codes are released under the modified-BSD license.-->
-<!--3. There is no patent in all algorithms in WORLD.<br/>-->
-<!--4. This is a prototype version, and there may be bugs.<br/>-->
-<!--   (according to Morise's repository)-->
 
 ## TODO List
   - [ ] Realtime synthesizer
-
