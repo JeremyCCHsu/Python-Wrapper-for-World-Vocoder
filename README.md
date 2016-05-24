@@ -40,17 +40,17 @@ Python 2.7.6 on <br/>
 Cython 0.24 is required
 
 **Prerequisite**: <br/>
-Please `git clone` Morise's World (C++ version) first <br/>
-   https://github.com/mmorise/World
+1. Please `git clone` Morise's World (C++ version) first (https://github.com/mmorise/World)
+
+2. Then `git clone` this repository, and move all the files to the directory of World.
+
 
 **If you just want to try out some experiments:** <br/>
-1. Clone this repository, and move the files to the directory of World.
-
-2. Execute <br/>
+1. Execute <br/>
   `python setup.py build_ext --inplace` <br/>
   Then you can use PyWorld from this directory.
 
-3. You can also copy the resulting **pyworld.so** file to<br/>
+2. You can also copy the resulting **pyworld.so** file to<br/>
   `~/.local/lib/python2.7/site-packages` <br/>
   so that you can use it everywhere like an installed package.
 
