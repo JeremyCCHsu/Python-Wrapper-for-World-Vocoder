@@ -40,16 +40,16 @@ Python 2.7.6 on <br/>
 Cython 0.24 is required
 
 **Prerequisite**: <br/>
-1. Please `git clone` Morise's World (C++ version) first (https://github.com/mmorise/World)
 
+1. Please `git clone` Morise's World (C++ version) first (https://github.com/mmorise/World)
 2. Then `git clone` this repository, and move all the files to the directory of World.
+
 
 
 **If you just want to try out some experiments:** <br/>
 1. Execute <br/>
   `python setup.py build_ext --inplace` <br/>
-  Then you can use PyWorld from this directory.
-
+  Then you can use PyWorld from this directory.<br/>
 2. You can also copy the resulting **pyworld.so** file to<br/>
   `~/.local/lib/python2.7/site-packages` <br/>
   so that you can use it everywhere like an installed package.
@@ -59,12 +59,13 @@ Cython 0.24 is required
   `python setup.py install`
 
 
-Hint:
-  1. add `--user` if you don't have root access
-  2. If you want to uninstall PyWorld, just remove the pyworld files from the installation directory.
-  3. You can validate installation by running<br/>
-    `python demo.py`<br/>
-     to see if you get results in the `test/` direcotry.
+Hint:<br/>
+1. add `--user` if you don't have root access<br/>
+2. If you want to uninstall PyWorld, just remove the pyworld files from the installation directory.<br/>
+3. You can validate installation by running  
+    
+`python demo.py`  
+to see if you get results in the `test/` direcotry.
 
 ## Troubleshooting
 1. Upgrade your Cython version to 0.24.<br/>
