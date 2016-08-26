@@ -29,18 +29,31 @@ def wavwrite(filename, fs, y):
     write(filename, fs, y)
 
 
-def savefig(filename, figlist):
+def savefig(filename, figlist, log=True):
+    h = 10
     n = len(figlist)
-    plt.figure()
-    for i, f in enumerate(figlist):
-        plt.subplot(n, 1, i+1)
-        if len(f.shape) == 1:
-            plt.plot(f)
-            plt.xlim(len(f))
-        elif len(f.shape) == 2:
-            plt.imshow(np.log(f.T + EPSILON))
-        else:
-            raise ValueError('Input dimension must < 3.')
+    # peek into instances
+    f = figlist[0]
+    if len(f.shape) == 1:
+        plt.figure()
+        for i, f in enumerate(figlist):
+            plt.subplot(n, 1, i+1)
+            if len(f.shape) == 1:
+                plt.plot(f)
+                plt.xlim([0, len(f)])
+    elif len(f.shape) == 2:
+        Nsmp, dim = figlist[0].shape
+        figsize=(h * float(Nsmp) / dim, len(figlist) * h)
+        print figsize
+        plt.figure(figsize=figsize)
+        for i, f in enumerate(figlist):
+            plt.subplot(n, 1, i+1)
+            if log:
+                plt.imshow(np.log(f.T + EPSILON))
+            else:
+                plt.imshow(f.T + EPSILON)
+    else:
+        raise ValueError('Input dimension must < 3.')
     plt.savefig(filename)
 # =================================
 
@@ -81,13 +94,12 @@ def main(args):
     # Comparison
     savefig('test/wavform.png', [x, _y, y])
     savefig('test/sp.png', [_sp, sp])
-    savefig('test/ap.png', [_ap, ap])
+    savefig('test/ap.png', [_ap, ap], log=False)
     savefig('test/f0.png', [_f0, f0])
 
     print 'Please check "test" directory for output files'
 
 
 if __name__ == '__main__':
-    # print parser
     args = parser.parse_args()
     main(args)
