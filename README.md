@@ -72,6 +72,7 @@ You can validate installation by running
 `python demo.py`  
 to see if you get results in `test/` direcotry.
 
+<br/>
 
 ## Troubleshooting
 0. Upgrade your Cython version to 0.24.<br/>
@@ -80,11 +81,14 @@ to see if you get results in `test/` direcotry.
    Unzip it, and `python setup.py install` it.<br/>
    (I tried `pip install Cython` but the upgrade didn't seem correct)<br/>
    (Again, add `--user` if you don't have root access.)  
-1. The following code might be needed in some configurations:<br/>
-```python
-import matplotlib  
-matplotlib.use('Agg')
-```
+
+1. The following code might be needed in some configurations:
+  ```python
+  import matplotlib  
+  matplotlib.use('Agg')
+  ```
+
+<br/>
 
 ## Note:
 1. This wrapper is an updated version of sotelo's "world.py"<br/>
