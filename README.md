@@ -1,4 +1,4 @@
-#PyWorldVocoder<br/>A Python wrapper for World Vocoder
+# PyWorldVocoder<br/>A Python wrapper for World Vocoder
 
 Morise's World Vocoder is a fast and high-quality vocoder.
 World Vocoder parameterizes speech into three components:
@@ -16,9 +16,9 @@ For more information, please visit Morise's Github repository:
   http://ml.cs.yamanashi.ac.jp/world/english/
 
 
-##APIs
+## I. APIs
 
-###Vocoder Functions
+### Vocoder Functions
 ```python
 import pyworld as pw
 pyDioOpt = pw.pyDioOption()
@@ -30,13 +30,15 @@ y = pw.synthesize(f0, sp, ap, fs, pyDioOpt.option['frame_period'])
 ```
 
 
-###Utility
+### Utility
 ```python
 # Convert speech into features (using default options)
 f0, sp, ap, pyDioOpt = pw.wav2world(x, fs)
 ```
 
-## Installation
+<br/>
+
+## II. Installation
 ### Environment
 Linux Ubuntu 14.04 <br/>
 Python 2.7.6 on <br/>
@@ -49,12 +51,12 @@ git clone https://github.com/JeremyCCHsu/Python-Wrapper-for-World-Vocoder.git
 cd Python-Wrapper-for-World-Vocoder
 bash download_vocoder.sh
 ```
-It will automatically `git clone` Morise's World Vocoder (C++ version).
+It will automatically `git clone` Morise's World Vocoder (C++ version).  
 Then you can choose from the following installation options.
 
 
-### Options
-9. If you want to "install" this package, try <br/>**
+### Installation Mode
+9. If you want to "install" this package, try <br/>
   `python setup.py install`  
   (add `--user` if you don't have root access)
 0. If you just want to try out some experiments, execute  
@@ -78,11 +80,11 @@ to see if you get results in `test/` direcotry.
    Unzip it, and `python setup.py install` it.<br/>
    (I tried `pip install Cython` but the upgrade didn't seem correct)<br/>
    (Again, add `--user` if you don't have root access.)  
-1. The following code might be needed in some configurations:  
-  ```python
-  import matplotlib
-  matplotlib.use('Agg')
-  ```
+1. The following code might be needed in some configurations:<br/>
+```python
+import matplotlib  
+matplotlib.use('Agg')
+```
 
 ## Note:
 1. This wrapper is an updated version of sotelo's "world.py"<br/>
