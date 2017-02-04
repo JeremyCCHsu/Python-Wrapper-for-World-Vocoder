@@ -1,1 +1,6 @@
 test/
+build/
+World/
+src/
+*.cpp
+*.so

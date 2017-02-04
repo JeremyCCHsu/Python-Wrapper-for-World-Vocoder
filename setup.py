@@ -17,4 +17,4 @@ ext_modules = [
 setup(name="pyworld",
 	ext_modules=ext_modules,
 	cmdclass={'build_ext': build_ext},
-    version='0.1.0')
+    version='0.1.1')

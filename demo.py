@@ -2,6 +2,8 @@ import pyworld as pw
 import os
 from shutil import rmtree
 import numpy as np
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from scipy.io.wavfile import read, write
 import argparse
