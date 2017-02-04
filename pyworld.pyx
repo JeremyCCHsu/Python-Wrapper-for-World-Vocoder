@@ -23,7 +23,7 @@ cdef extern from "src/world/cheaptrick.h":
         double f0_floor
 
     int GetFFTSizeForCheapTrick(int fs, const CheapTrickOption *option)
-    void InitializeCheapTrickOption(CheapTrickOption *option)
+    void InitializeCheapTrickOption(int fs, CheapTrickOption *option)
     void CheapTrick(const double *x, int x_length, int fs, const double *time_axis,
         const double *f0, int f0_length, const CheapTrickOption *option,
         double **spectrogram)
@@ -113,7 +113,7 @@ def cheaptrick(
     int fs):
     ''' STRAIGHT spectrum '''
     cdef CheapTrickOption option
-    InitializeCheapTrickOption(&option)
+    InitializeCheapTrickOption(fs, &option)
     cdef int x_length = len(x)
     cdef int f0_length = len(f0)
     cdef int fft_size = GetFFTSizeForCheapTrick(fs, &option)
@@ -139,7 +139,7 @@ def d4c(
     cdef int x_length = len(x)
     cdef int f0_length = len(f0)
     cdef CheapTrickOption opt
-    InitializeCheapTrickOption(&opt)
+    InitializeCheapTrickOption(fs, &opt)
     cdef int fft_size = GetFFTSizeForCheapTrick(fs, &opt)
 
     cdef D4COption option
