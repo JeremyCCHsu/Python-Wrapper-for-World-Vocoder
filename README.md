@@ -1,5 +1,11 @@
 # PyWorldVocoder<br/>A Python wrapper for World Vocoder
 
+
+| **`Linux`** |
+|-----------------|
+| [![Build Status](https://travis-ci.org/JeremyCCHsu/Python-Wrapper-for-World-Vocoder.svg?branch=master)](https://travis-ci.org/JeremyCCHsu/Python-Wrapper-for-World-Vocoder) |
+
+
 Morise's World Vocoder is a fast and high-quality vocoder.
 World Vocoder parameterizes speech into three components:
 
