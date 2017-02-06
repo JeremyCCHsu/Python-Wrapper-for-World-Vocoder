@@ -1,3 +1,4 @@
+from __future__ import print_function
 import pyworld as pw
 import os
 from shutil import rmtree
@@ -46,7 +47,6 @@ def savefig(filename, figlist, log=True):
     elif len(f.shape) == 2:
         Nsmp, dim = figlist[0].shape
         figsize=(h * float(Nsmp) / dim, len(figlist) * h)
-        print figsize
         plt.figure(figsize=figsize)
         for i, f in enumerate(figlist):
             plt.subplot(n, 1, i+1)
@@ -99,7 +99,7 @@ def main(args):
     savefig('test/ap.png', [_ap, ap], log=False)
     savefig('test/f0.png', [_f0, f0])
 
-    print 'Please check "test" directory for output files'
+    print('Please check "test" directory for output files')
 
 
 if __name__ == '__main__':

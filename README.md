@@ -45,11 +45,14 @@ f0, sp, ap, pyDioOpt = pw.wav2world(x, fs)
 <br/>
 
 ## II. Installation
-### Environment
-Linux Ubuntu 14.04 <br/>
-Python 2.7.6 on <br/>
-Cython 0.24 (or later versions; required)
-Matplotlib (optional; for demo.py only)
+### Environment/Dependencies  
+- Linux Ubuntu 14.04/16.04  
+- Python 2.7.6/3.5  
+- Cython 0.24 (or later versions; required)  
+- Scipy
+- Numpy
+- argparse
+- Matplotlib (optional; for demo.py only)
 
 ### Installation procedures
 ```bash
