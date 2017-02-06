@@ -1,4 +1,4 @@
-numpy as np
+numpy
 matplotlib
 scipy
 argparse
