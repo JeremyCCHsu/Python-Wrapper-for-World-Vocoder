@@ -13,13 +13,12 @@ World Vocoder parameterizes speech into three components:
   2. smoothed spectrogram  
   3. aperiodicity  
 
-It can also resynthesize speech using these features.
+It can also resynthesize speech using these features (see examples below).
 
-For more information, please visit Morise's Github repository:  
-  https://github.com/mmorise/World  
-  <br/>
-  And the official website of World Vocoder:<br/>
-  http://ml.cs.yamanashi.ac.jp/world/english/
+For more information, please visit [Morise's World repository](https://github.com/mmorise/World) 
+and the [official website of World Vocoder](http://ml.cs.yamanashi.ac.jp/world/english/)
+
+<br/>
 
 
 ## I. APIs
@@ -49,19 +48,25 @@ f0, sp, ap, pyDioOpt = pw.wav2world(x, fs)
 - Linux Ubuntu 14.04/16.04  
 - Python 2.7.6/3.5  
 - Cython 0.24 (or later versions; required)  
-- Scipy
-- Numpy
-- argparse
-- Matplotlib (optional; for demo.py only)
+- Scipy  
+- Numpy  
+- argparse  
+- Matplotlib (optional; for demo.py only)  
+
+You can simply install these by `pip install -r requirements.txt`
 
 ### Installation procedures
 ```bash
+pip install -U pip
+pip install -r requirements.txt
 git clone https://github.com/JeremyCCHsu/Python-Wrapper-for-World-Vocoder.git
 cd Python-Wrapper-for-World-Vocoder
 bash download_vocoder.sh
+python setup.py install
 ```
 It will automatically `git clone` Morise's World Vocoder (C++ version).  
-Then you can choose from the following installation options.
+<br/>
+As for installation mode (the last line), you can choose from the following options.
 
 
 ### Installation Mode
