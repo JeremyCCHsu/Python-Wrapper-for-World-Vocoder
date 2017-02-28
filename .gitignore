@@ -4,3 +4,5 @@ World/
 src/
 *.cpp
 *.so
+*.pyd
+*.egg-info
