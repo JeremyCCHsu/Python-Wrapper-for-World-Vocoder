@@ -49,6 +49,7 @@ def savefig(filename, figlist, log=True):
     else:
         raise ValueError('Input dimension must < 3.')
     plt.savefig(filename)
+    # plt.close()
 
 
 def main(args):

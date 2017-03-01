@@ -68,15 +68,19 @@ As for installation mode (the last line), you can choose from the following opti
   Alternatively you can copy/symlink the compiled files using pip, e.g. `pip install -e .`
 
 ### Environment/Dependencies  
-- Linux Ubuntu 14.04/16.04, Windows
-- Python 2.7/3.5
-- Cython 0.24 (or later versions; required)
-- Numpy
-
-Optional (for demo.py only):  
-- argparse
-- librosa
-- Matplotlib
+- Operating systems
+  - Linux Ubuntu 14.04/16.04
+  - Windows (thanks to [wuaalb](https://github.com/wuaalb))
+- Python
+  - 2.7
+  - 3.5
+  - Required packages
+    - Cython 0.24 (or later versions; required)
+    - Numpy
+  - Optional (for demo.py only)
+    - argparse
+    - librosa
+    - Matplotlib
 
 You can simply install these by `pip install -r requirements.txt`
 
@@ -100,16 +104,22 @@ to see if you get results in `test/` direcotry.
  import matplotlib
  matplotlib.use('Agg')
  ```
-
-
-## Note:
-1. This wrapper is an updated version of sotelo's "world.py"<br/>
-   https://github.com/sotelo/world.py
-
-## Acknowledgement
-Thank all contributors ([rikrd](https://github.com/rikrd), [wuaalb](https://github.com/wuaalb)) for making this repo better!
+3. If you encounter `library not found: sndfile` error upon executing `demo.py`,  
+   you might have to install it by `apt-get install libsoundfile1`.  
+   You can also replace `pysoundfile` with `scipy` or `librosa`.   
+   - librosa:
+     - load(fiilename, dtype=np.float64)
+     - output.write_wav(filename, wav, fs)
+     - remember to pass `dtype` argument to ensure that the method gives you a `double`.
+   - scipy:
+     - You'll have to write a customized utility function based on the following methods
+     - scipy.io.wavfile.read (but this gives you `short`)
+     - scipy.io.wavfile.write
 
 ## TODO List
   
 - [ ] Realtime synthesizer
 
+## Acknowledgement
+Thank all contributors ([rikrd](https://github.com/rikrd), [wuaalb](https://github.com/wuaalb)) for making this repo better!  
+This wrapper is an updated version of [r9y9's "world.py"](https://github.com/sotelo/world.py)<br/>
