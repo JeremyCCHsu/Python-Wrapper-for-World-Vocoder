@@ -122,4 +122,4 @@ to see if you get results in `test/` direcotry.
 
 ## Acknowledgement
 Thank all contributors ([rikrd](https://github.com/rikrd), [wuaalb](https://github.com/wuaalb)) for making this repo better!  
-This wrapper is an updated version of [r9y9's "world.py"](https://github.com/sotelo/world.py)<br/>
+This wrapper is an updated version of [sotelo's "world.py"](https://github.com/sotelo/world.py)<br/>
