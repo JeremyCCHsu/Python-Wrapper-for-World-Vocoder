@@ -5,8 +5,9 @@ from shutil import rmtree
 import argparse
 
 import numpy as np
-#import matplotlib
-#matplotlib.use('Agg')
+
+import matplotlib      # Remove this line if you don't need them
+matplotlib.use('Agg')  # Remove this line if you don't need them
 import matplotlib.pyplot as plt
 
 import soundfile as sf

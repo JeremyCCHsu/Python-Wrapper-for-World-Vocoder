@@ -105,6 +105,10 @@ to see if you get results in `test/` direcotry.
 1. This wrapper is an updated version of sotelo's "world.py"<br/>
    https://github.com/sotelo/world.py
 
-## TODO List
+## Acknowledgement
+Thank all contributors ([rikrd](https://github.com/rikrd), [wuaalb](https://github.com/wuaalb)) for making this repo better!
 
+## TODO List
+  
 - [ ] Realtime synthesizer
+
