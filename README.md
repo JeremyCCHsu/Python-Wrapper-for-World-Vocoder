@@ -41,18 +41,6 @@ f0, sp, ap, pyDioOpt = pw.wav2world(x, fs)
 
 
 ## II. Installation
-### Environment/Dependencies  
-- Linux Ubuntu 14.04/16.04, Windows
-- Python 2.7/3.5
-- Cython 0.24 (or later versions; required)
-- Numpy
-- argparse (optional; for demo.py only)
-- PySoundFile (optional; for demo.py only)
-- Matplotlib (optional; for demo.py only)
-
-You can simply install these by `pip install -r requirements.txt`
-
-
 ### Installation procedures
 ```bash
 git clone https://github.com/JeremyCCHsu/Python-Wrapper-for-World-Vocoder.git
@@ -78,6 +66,19 @@ As for installation mode (the last line), you can choose from the following opti
   `~/.local/lib/python2.7/site-packages` (or corresponding Windows directory)
   so that you can use it everywhere like an installed package.<br/>
   Alternatively you can copy/symlink the compiled files using pip, e.g. `pip install -e .`
+
+### Environment/Dependencies  
+- Linux Ubuntu 14.04/16.04, Windows
+- Python 2.7/3.5
+- Cython 0.24 (or later versions; required)
+- Numpy
+
+Optional (for demo.py only):  
+- argparse
+- librosa
+- Matplotlib
+
+You can simply install these by `pip install -r requirements.txt`
 
 
 ### Validation
