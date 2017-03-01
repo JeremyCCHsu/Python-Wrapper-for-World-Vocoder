@@ -55,9 +55,9 @@ You can simply install these by `pip install -r requirements.txt`
 
 ### Installation procedures
 ```bash
+git clone https://github.com/JeremyCCHsu/Python-Wrapper-for-World-Vocoder.git
 pip install -U pip
 pip install -r requirements.txt
-git clone https://github.com/JeremyCCHsu/Python-Wrapper-for-World-Vocoder.git
 cd Python-Wrapper-for-World-Vocoder
 bash download_vocoder.sh
 python setup.py install
