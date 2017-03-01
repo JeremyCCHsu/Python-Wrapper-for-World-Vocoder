@@ -10,8 +10,8 @@ import matplotlib      # Remove this line if you don't need them
 matplotlib.use('Agg')  # Remove this line if you don't need them
 import matplotlib.pyplot as plt
 
-# import soundfile as sf
-import librosa
+import soundfile as sf
+# import librosa
 import pyworld as pw
 
 
@@ -56,8 +56,8 @@ def main(args):
         rmtree('test')
     os.mkdir('test')
 
-    # x, fs = sf.read('utterance/vaiueo2d.wav')
-    x, fs = librosa.load('utterance/vaiueo2d.wav', dtype=np.float64)
+    x, fs = sf.read('utterance/vaiueo2d.wav')
+    # x, fs = librosa.load('utterance/vaiueo2d.wav', dtype=np.float64)
 
     # 1. A convient way
     f0, sp, ap, pyDioOpt = pw.wav2world(x, fs)    # use default options
@@ -76,14 +76,17 @@ def main(args):
     _sp = pw.cheaptrick(x, _f0, t, fs)
     _ap = pw.d4c(x, _f0, t, fs)
     _y = pw.synthesize(_f0, _sp, _ap, fs, pyDioOpt.option['frame_period'])
-    librosa.output.write_wav('test/y_without_f0_refinement.wav', _y, fs)
+    # librosa.output.write_wav('test/y_without_f0_refinement.wav', _y, fs)
+    sf.write('test/y_without_f0_refinement.wav', _y, fs)
+
 
     # 2-2 With F0 refinement (using stonemask)
     f0 = pw.stonemask(x, _f0, t, fs)
     sp = pw.cheaptrick(x, f0, t, fs)
     ap = pw.d4c(x, f0, t, fs)
     y = pw.synthesize(f0, sp, ap, fs, pyDioOpt.option['frame_period'])
-    librosa.output.write_wav('test/y_with_f0_refinement.wav', y, fs)
+    # librosa.output.write_wav('test/y_with_f0_refinement.wav', y, fs)
+    sf.write('test/y_with_f0_refinement.wav', y, fs)
 
     # Comparison
     savefig('test/wavform.png', [x, _y, y])
