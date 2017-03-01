@@ -57,7 +57,7 @@ def main(args):
     os.mkdir('test')
 
     # x, fs = sf.read('utterance/vaiueo2d.wav')
-    x, fs = librosa.load('utterance/vaiueo2d.wav')
+    x, fs = librosa.load('utterance/vaiueo2d.wav', dtype=np.float64)
 
     # 1. A convient way
     f0, sp, ap, pyDioOpt = pw.wav2world(x, fs)    # use default options
