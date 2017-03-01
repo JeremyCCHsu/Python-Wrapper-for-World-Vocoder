@@ -1,39 +1,27 @@
-from __future__ import print_function
-import pyworld as pw
+from __future__ import division, print_function
+
 import os
 from shutil import rmtree
-import numpy as np
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
-from scipy.io.wavfile import read, write
 import argparse
+
+import numpy as np
+#import matplotlib
+#matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
+import soundfile as sf
+import pyworld as pw
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-r", "--frame_rate", type=int, default=5)
 parser.add_argument("-s", "--speed", type=int, default=1)
 
-# =================================
-SHORT_MAX = 32767
+
 EPSILON = 1e-8
-def wavread(filename):
-    fs, x = read(filename)
-    x = x.astype(np.float) / SHORT_MAX
-    return x, fs
-
-
-def wavwrite(filename, fs, y):
-    ymax = np.max(np.abs(y))
-    if ymax < 1.0:
-        y = y * SHORT_MAX
-    else:
-        y = (y / ymax) * SHORT_MAX
-    y = y.astype(np.int16)
-    write(filename, fs, y)
-
 
 def savefig(filename, figlist, log=True):
-    h = 10
+    #h = 10
     n = len(figlist)
     # peek into instances
     f = figlist[0]
@@ -46,18 +34,19 @@ def savefig(filename, figlist, log=True):
                 plt.xlim([0, len(f)])
     elif len(f.shape) == 2:
         Nsmp, dim = figlist[0].shape
-        figsize=(h * float(Nsmp) / dim, len(figlist) * h)
-        plt.figure(figsize=figsize)
+        #figsize=(h * float(Nsmp) / dim, len(figlist) * h)
+        #plt.figure(figsize=figsize)
+        plt.figure()
         for i, f in enumerate(figlist):
             plt.subplot(n, 1, i+1)
             if log:
-                plt.imshow(np.log(f.T + EPSILON))
+                x = np.log(f + EPSILON)
             else:
-                plt.imshow(f.T + EPSILON)
+                x = f + EPSILON
+            plt.imshow(x.T, origin='lower', interpolation='none', aspect='auto', extent=(0, x.shape[0], 0, x.shape[1]))
     else:
         raise ValueError('Input dimension must < 3.')
     plt.savefig(filename)
-# =================================
 
 
 def main(args):
@@ -65,7 +54,7 @@ def main(args):
         rmtree('test')
     os.mkdir('test')
 
-    x, fs = wavread('utterance/vaiueo2d.wav')
+    x, fs = sf.read('utterance/vaiueo2d.wav')
 
     # 1. A convient way
     f0, sp, ap, pyDioOpt = pw.wav2world(x, fs)    # use default options
@@ -84,14 +73,14 @@ def main(args):
     _sp = pw.cheaptrick(x, _f0, t, fs)
     _ap = pw.d4c(x, _f0, t, fs)
     _y = pw.synthesize(_f0, _sp, _ap, fs, pyDioOpt.option['frame_period'])
-    wavwrite('test/y_without_f0_refinement.wav', fs, _y)
+    sf.write('test/y_without_f0_refinement.wav', _y, fs)
 
     # 2-2 With F0 refinement (using stonemask)
     f0 = pw.stonemask(x, _f0, t, fs)
     sp = pw.cheaptrick(x, f0, t, fs)
     ap = pw.d4c(x, f0, t, fs)
     y = pw.synthesize(f0, sp, ap, fs, pyDioOpt.option['frame_period'])
-    wavwrite('test/y_with_f0_refinement.wav', fs, y)
+    sf.write('test/y_with_f0_refinement.wav', y, fs)
 
     # Comparison
     savefig('test/wavform.png', [x, _y, y])
