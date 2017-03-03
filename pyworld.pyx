@@ -43,6 +43,18 @@ cdef extern from "src/world/dio.h":
         double *temporal_positions, double *f0)
 
 
+cdef extern from "src/world/harvest.h":
+    ctypedef struct HarvestOption:
+        double f0_floor
+        double f0_ceil
+        double frame_period
+
+    void InitializeHarvestOption(HarvestOption *option)    
+    int GetSamplesForHarvest(int fs, int x_length, double frame_period)
+    void Harvest(const double *x, int x_length, int fs, const HarvestOption *option,
+        double *temporal_positions, double *f0)
+        
+        
 cdef extern from "src/world/d4c.h":
     ctypedef struct D4COption:
         double threshold
@@ -89,6 +101,22 @@ def dio(
     return f0, temporal_positions
 
 
+def harvest(
+    np.ndarray[double, ndim=1, mode="c"] x not None, 
+    int fs):
+    ''' Raw Pitch (F0) extractor '''
+    cdef int x_length = <int>len(x)
+    cdef HarvestOption option
+    InitializeHarvestOption(&option)
+    f0_length = GetSamplesForHarvest(fs, x_length, option.frame_period)
+    cdef np.ndarray[double, ndim=1, mode="c"] f0 = \
+        np.zeros(f0_length, dtype = np.dtype('float64'))
+    cdef np.ndarray[double, ndim=1, mode="c"] temporal_positions = \
+        np.zeros(f0_length, dtype = np.dtype('float64'))
+    Harvest(&x[0], x_length, fs, &option, &temporal_positions[0], &f0[0])
+    return f0, temporal_positions
+    
+    
 def stonemask(
     np.ndarray[double, ndim=1, mode="c"] x not None, 
     np.ndarray[double, ndim=1, mode="c"] f0 not None, 
