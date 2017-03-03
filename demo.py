@@ -16,7 +16,7 @@ import pyworld as pw
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-r", "--frame_rate", type=int, default=5)
+parser.add_argument("-f", "--frame_period", type=float, default=5.0)
 parser.add_argument("-s", "--speed", type=int, default=1)
 
 
@@ -69,7 +69,7 @@ def main(args):
         f0_floor=50,
         f0_ceil=600,
         channels_in_octave=2,
-        frame_period=args.frame_rate,
+        frame_period=args.frame_period,
         speed=args.speed)
 
     # 2-1 DIO without F0 refinement
