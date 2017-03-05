@@ -120,5 +120,5 @@ to see if you get results in `test/` direcotry.
 - [ ] Realtime synthesizer
 
 ## Acknowledgement
-Thank all contributors [wuaalb](https://github.com/wuaalb)), ([rikrd](https://github.com/rikrd) for making this repo better!  
+Thank all contributors ([wuaalb](https://github.com/wuaalb), [rikrd](https://github.com/rikrd)) for making this repo better!  
 This wrapper is an updated version of [sotelo's "world.py"](https://github.com/sotelo/world.py)<br/>
