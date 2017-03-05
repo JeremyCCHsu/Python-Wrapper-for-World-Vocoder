@@ -43,9 +43,9 @@ f0, sp, ap = pw.wav2world(x, fs)
 ### Installation procedures
 ```bash
 git clone https://github.com/JeremyCCHsu/Python-Wrapper-for-World-Vocoder.git
+cd Python-Wrapper-for-World-Vocoder
 pip install -U pip
 pip install -r requirements.txt
-cd Python-Wrapper-for-World-Vocoder
 bash download_vocoder.sh
 python setup.py install
 ```
@@ -68,17 +68,17 @@ As for installation mode (the last line), you can choose from the following opti
 
 ### Environment/Dependencies  
 - Operating systems
-  - Linux Ubuntu 14.04/16.04
+  - Linux Ubuntu 16.04/14.04
   - Windows (thanks to [wuaalb](https://github.com/wuaalb))
 - Python
   - 2.7
-  - 3.5
+  - 3.6/3.5
   - Required packages
     - Cython 0.24 (or later versions; required)
     - Numpy
   - Optional (for demo.py only)
     - argparse
-    - librosa
+    - pysoundfile
     - Matplotlib
 
 You can simply install these by `pip install -r requirements.txt`
@@ -120,5 +120,5 @@ to see if you get results in `test/` direcotry.
 - [ ] Realtime synthesizer
 
 ## Acknowledgement
-Thank all contributors ([rikrd](https://github.com/rikrd), [wuaalb](https://github.com/wuaalb)) for making this repo better!  
+Thank all contributors [wuaalb](https://github.com/wuaalb)), ([rikrd](https://github.com/rikrd) for making this repo better!  
 This wrapper is an updated version of [sotelo's "world.py"](https://github.com/sotelo/world.py)<br/>
