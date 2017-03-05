@@ -10,11 +10,11 @@ ext_modules = [
         	os.path.join(os.getcwd(), 'src')],
         sources=["pyworld.pyx", 
         	"src/synthesis.cpp", "src/cheaptrick.cpp", "src/common.cpp", 
-        	"src/d4c.cpp", "src/dio.cpp", "src/fft.cpp", "src/matlabfunctions.cpp",
+        	"src/d4c.cpp", "src/dio.cpp", "src/harvest.cpp", "src/fft.cpp", "src/matlabfunctions.cpp",
         	"src/stonemask.cpp", "src/synthesisrealtime.cpp"],
         language="c++")]
 
 setup(name="pyworld",
 	ext_modules=ext_modules,
 	cmdclass={'build_ext': build_ext},
-    version='0.1.1')
+    version='0.2')

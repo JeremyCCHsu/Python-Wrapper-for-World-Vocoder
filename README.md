@@ -24,19 +24,18 @@ and the [official website of World Vocoder](http://ml.cs.yamanashi.ac.jp/world/e
 ### Vocoder Functions
 ```python
 import pyworld as pw
-pyDioOpt = pw.pyDioOption()
 _f0, t = pw.dio(x, fs)    # raw pitch extractor
 f0 = pw.stonemask(x, _f0, t, fs)  # pitch refinement
 sp = pw.cheaptrick(x, f0, t, fs)  # extract smoothed spectrogram
 ap = pw.d4c(x, f0, t, fs)         # extract aperiodicity
-y = pw.synthesize(f0, sp, ap, fs, pyDioOpt.option['frame_period'])
+y = pw.synthesize(f0, sp, ap, fs)
 ```
 
 
 ### Utility
 ```python
 # Convert speech into features (using default options)
-f0, sp, ap, pyDioOpt = pw.wav2world(x, fs)
+f0, sp, ap = pw.wav2world(x, fs)
 ```
 
 
