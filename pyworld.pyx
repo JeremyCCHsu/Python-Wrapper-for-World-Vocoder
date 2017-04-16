@@ -166,6 +166,9 @@ def harvest(np.ndarray[double, ndim=1, mode="c"] x not None, int fs,
     cdef int x_length = <int>len(x)
     cdef HarvestOption option
     InitializeHarvestOption(&option)
+    option.f0_floor = f0_floor
+    option.f0_ceil = f0_ceil
+    option.frame_period = frame_period
     f0_length = GetSamplesForHarvest(fs, x_length, option.frame_period)
     cdef np.ndarray[double, ndim=1, mode="c"] f0 = \
         np.zeros(f0_length, dtype = np.dtype('float64'))
