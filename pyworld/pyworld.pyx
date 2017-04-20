@@ -1,6 +1,4 @@
 import cython
-from libc.stdlib cimport free
-from cpython cimport PyObject, Py_INCREF, array
 
 import numpy as np
 cimport numpy as np
