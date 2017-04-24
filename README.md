@@ -15,7 +15,7 @@ World Vocoder parameterizes speech into three components:
 
 It can also resynthesize speech using these features (see examples below).
 
-For more information, please visit [Morise's World repository](https://github.com/mmorise/World) 
+For more information, please visit [Morise's World repository](https://github.com/mmorise/World)
 and the [official website of World Vocoder](http://ml.cs.yamanashi.ac.jp/world/english/)
 
 
@@ -44,13 +44,12 @@ f0, sp, ap = pw.wav2world(x, fs)
 ```bash
 git clone https://github.com/JeremyCCHsu/Python-Wrapper-for-World-Vocoder.git
 cd Python-Wrapper-for-World-Vocoder
+git submodule update --init
 pip install -U pip
 pip install -r requirements.txt
-bash download_vocoder.sh
 python setup.py install
 ```
 It will automatically `git clone` Morise's World Vocoder (C++ version).<br/>
-Alternatively you can clone or download the World repository manually and copy its "src" directory to this repositories directory.<br/>
 As for installation mode (the last line), you can choose from the following options.
 
 
@@ -116,7 +115,7 @@ to see if you get results in `test/` direcotry.
      - scipy.io.wavfile.write
 
 ## TODO List
-  
+
 - [ ] Realtime synthesizer
 
 ## Acknowledgement

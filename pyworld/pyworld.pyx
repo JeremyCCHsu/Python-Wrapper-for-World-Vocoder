@@ -1,21 +1,19 @@
 import cython
-from libc.stdlib cimport free
-from cpython cimport PyObject, Py_INCREF, array
 
 import numpy as np
 cimport numpy as np
 np.import_array()
 
 
-cdef extern from "src/world/synthesis.h":
-    void Synthesis(const double *f0, 
+cdef extern from "world/synthesis.h":
+    void Synthesis(const double *f0,
         int f0_length, const double * const *spectrogram,
-        const double * const *aperiodicity, 
-        int fft_size, double frame_period, 
+        const double * const *aperiodicity,
+        int fft_size, double frame_period,
         int fs, int y_length, double *y)
 
-    
-cdef extern from "src/world/cheaptrick.h":
+
+cdef extern from "world/cheaptrick.h":
     ctypedef struct CheapTrickOption:
         double q1
         double f0_floor
@@ -28,7 +26,7 @@ cdef extern from "src/world/cheaptrick.h":
         double **spectrogram)
 
 
-cdef extern from "src/world/dio.h":
+cdef extern from "world/dio.h":
     ctypedef struct DioOption:
         double f0_floor
         double f0_ceil
@@ -43,31 +41,31 @@ cdef extern from "src/world/dio.h":
         double *temporal_positions, double *f0)
 
 
-cdef extern from "src/world/harvest.h":
+cdef extern from "world/harvest.h":
     ctypedef struct HarvestOption:
         double f0_floor
         double f0_ceil
         double frame_period
 
-    void InitializeHarvestOption(HarvestOption *option)    
+    void InitializeHarvestOption(HarvestOption *option)
     int GetSamplesForHarvest(int fs, int x_length, double frame_period)
     void Harvest(const double *x, int x_length, int fs, const HarvestOption *option,
         double *temporal_positions, double *f0)
-        
-        
-cdef extern from "src/world/d4c.h":
+
+
+cdef extern from "world/d4c.h":
     ctypedef struct D4COption:
         double threshold
-    
+
     void InitializeD4COption(D4COption *option)
     void D4C(const double *x, int x_length, int fs, const double *temporal_positions,
         const double *f0, int f0_length, int fft_size, const D4COption *option,
-        double **aperiodicity) 
+        double **aperiodicity)
 
 
-cdef extern from "src/world/stonemask.h":
-    void StoneMask(const double *x, int x_length, int fs, 
-        const double *temporal_positions, const double *f0, int f0_length, 
+cdef extern from "world/stonemask.h":
+    void StoneMask(const double *x, int x_length, int fs,
+        const double *temporal_positions, const double *f0, int f0_length,
         double *refined_f0)
 
 
@@ -75,9 +73,9 @@ default_frame_period = 5.0
 default_f0_floor = 71.0
 default_f0_ceil = 800.0
 
-def dio(np.ndarray[double, ndim=1, mode="c"] x not None, int fs, 
-        f0_floor=default_f0_floor, f0_ceil=default_f0_ceil, 
-        channels_in_octave=2.0, frame_period=default_frame_period, 
+def dio(np.ndarray[double, ndim=1, mode="c"] x not None, int fs,
+        f0_floor=default_f0_floor, f0_ceil=default_f0_ceil,
+        channels_in_octave=2.0, frame_period=default_frame_period,
         speed=1, allowed_range=0.1):
     """DIO F0 extraction algorithm.
 
@@ -100,14 +98,14 @@ def dio(np.ndarray[double, ndim=1, mode="c"] x not None, int fs,
         Period between consecutive frames in milliseconds.
         Default: 5.0
     speed : int
-        The F0 estimator may downsample the input signal using this integer factor 
+        The F0 estimator may downsample the input signal using this integer factor
         (range [1;12]). The algorithm will then operate on a signal at fs/speed Hz
-        to reduce computational complexity, but high values may negatively impact 
+        to reduce computational complexity, but high values may negatively impact
         accuracy.
         Default: 1 (no downsampling)
     allowed_range : float
-        Threshold for voiced/unvoiced decision. Can be any value >= 0, but 0.02 to 0.2 
-        is a reasonable range. Lower values will cause more frames to be considered 
+        Threshold for voiced/unvoiced decision. Can be any value >= 0, but 0.02 to 0.2
+        is a reasonable range. Lower values will cause more frames to be considered
         unvoiced (in the extreme case of `threshold=0`, almost all frames will be unvoiced).
         Default: 0.1
 
@@ -135,8 +133,8 @@ def dio(np.ndarray[double, ndim=1, mode="c"] x not None, int fs,
     return f0, temporal_positions
 
 
-def harvest(np.ndarray[double, ndim=1, mode="c"] x not None, int fs, 
-            f0_floor=default_f0_floor, f0_ceil=default_f0_ceil, 
+def harvest(np.ndarray[double, ndim=1, mode="c"] x not None, int fs,
+            f0_floor=default_f0_floor, f0_ceil=default_f0_ceil,
             frame_period=default_frame_period):
     """Harvest F0 extraction algorithm.
 
@@ -176,11 +174,11 @@ def harvest(np.ndarray[double, ndim=1, mode="c"] x not None, int fs,
         np.zeros(f0_length, dtype = np.dtype('float64'))
     Harvest(&x[0], x_length, fs, &option, &temporal_positions[0], &f0[0])
     return f0, temporal_positions
-    
-    
-def stonemask(np.ndarray[double, ndim=1, mode="c"] x not None, 
-              np.ndarray[double, ndim=1, mode="c"] f0 not None, 
-              np.ndarray[double, ndim=1, mode="c"] temporal_positions not None, 
+
+
+def stonemask(np.ndarray[double, ndim=1, mode="c"] x not None,
+              np.ndarray[double, ndim=1, mode="c"] f0 not None,
+              np.ndarray[double, ndim=1, mode="c"] temporal_positions not None,
               int fs):
     """StoneMask F0 refinement algorithm.
 
@@ -217,7 +215,7 @@ def get_cheaptrick_fft_size(fs, f0_floor=default_f0_floor):
     fs : int
         Sample rate of input signal in Hz.
     f0_floor : float
-        Lower F0 limit in Hz. The required FFT size is a direct 
+        Lower F0 limit in Hz. The required FFT size is a direct
         consequence of the F0 floor used.
         Default: 71.0
 
@@ -231,7 +229,7 @@ def get_cheaptrick_fft_size(fs, f0_floor=default_f0_floor):
     cdef int fft_size = GetFFTSizeForCheapTrick(fs, &option)
     return fft_size
 
-def cheaptrick(np.ndarray[double, ndim=1, mode="c"] x not None, 
+def cheaptrick(np.ndarray[double, ndim=1, mode="c"] x not None,
                np.ndarray[double, ndim=1, mode="c"] f0 not None,
                np.ndarray[double, ndim=1, mode="c"] temporal_positions not None,
                int fs,
@@ -255,8 +253,8 @@ def cheaptrick(np.ndarray[double, ndim=1, mode="c"] x not None,
         Lower F0 limit in Hz. Not used in case `fft_size` is specified.
         Default: 71.0
     fft_size : int, None
-        FFT size to be used. When `None` (default) is used, the FFT size is computed 
-        automatically as a function of the given input sample rate and F0 floor. 
+        FFT size to be used. When `None` (default) is used, the FFT size is computed
+        automatically as a function of the given input sample rate and F0 floor.
         When a specific FFT size is specified, the given `f0_floor` parameter is ignored.
         Default: None
 
@@ -289,7 +287,7 @@ def cheaptrick(np.ndarray[double, ndim=1, mode="c"] x not None,
     return np.array(spectrogram, dtype=np.float64)
 
 
-def d4c(np.ndarray[double, ndim=1, mode="c"] x not None, 
+def d4c(np.ndarray[double, ndim=1, mode="c"] x not None,
         np.ndarray[double, ndim=1, mode="c"] f0 not None,
         np.ndarray[double, ndim=1, mode="c"] temporal_positions not None,
         int fs,
@@ -311,17 +309,17 @@ def d4c(np.ndarray[double, ndim=1, mode="c"] x not None,
         Default: -0.15 (this value was tuned and normally does not need adjustment)
     threshold : float
         Threshold for aperiodicity-based voiced/unvoiced decision, in range 0 to 1.
-        If a value of 0 is used, voiced frames will be kept voiced. If a value > 0 is 
-        used some voiced frames can be considered unvoiced by setting their aperiodicity 
-        to 1 (thus synthesizing them with white noise). Using `threshold=0` will result 
-        in the behavior of older versions of D4C. The current default of 0.85 is meant 
-        to be used in combination with the Harvest F0 estimator, which was designed to have 
+        If a value of 0 is used, voiced frames will be kept voiced. If a value > 0 is
+        used some voiced frames can be considered unvoiced by setting their aperiodicity
+        to 1 (thus synthesizing them with white noise). Using `threshold=0` will result
+        in the behavior of older versions of D4C. The current default of 0.85 is meant
+        to be used in combination with the Harvest F0 estimator, which was designed to have
         a high voiced/unvoiced threshold (i.e. most frames will be considered voiced).
         Default: 0.85
     fft_size : int, None
-        FFT size to be used. When `None` (default) is used, the FFT size is computed 
-        automatically as a function of the given input sample rate and the default F0 floor. 
-        When a specific FFT size is specified, it should generally match the FFT size used 
+        FFT size to be used. When `None` (default) is used, the FFT size is computed
+        automatically as a function of the given input sample rate and the default F0 floor.
+        When a specific FFT size is specified, it should generally match the FFT size used
         to compute the spectral envelope (i.e. `ftt_size=sp.shape[1]`) to be able to resynthesize.
         Default: None
 
@@ -351,7 +349,7 @@ def d4c(np.ndarray[double, ndim=1, mode="c"] x not None,
 
     D4C(&x[0], x_length, fs, &temporal_positions[0],
         &f0[0], f0_length, fft_size0, &option,
-        cpp_aperiodicity) 
+        cpp_aperiodicity)
     return np.array(aperiodicity, dtype=np.float64)
 
 
@@ -371,7 +369,7 @@ def synthesize(np.ndarray[double, ndim=1, mode="c"] f0 not None,
     aperiodicity : ndarray
         Aperodicity envelope.
     fs : int
-        Sample rate of input signal in Hz.        
+        Sample rate of input signal in Hz.
     frame_period : float
         Period between consecutive frames in milliseconds.
         Default: 5.0
@@ -398,7 +396,7 @@ def synthesize(np.ndarray[double, ndim=1, mode="c"] f0 not None,
         cpp_spectrogram[i] = &spectrogram0[i,0]
         cpp_aperiodicity[i] = &aperiodicity0[i,0]
 
-    Synthesis(&f0[0], f0_length, cpp_spectrogram, 
+    Synthesis(&f0[0], f0_length, cpp_spectrogram,
         cpp_aperiodicity, fft_size, frame_period, fs, y_length, &y[0])
     return y
 
@@ -406,8 +404,8 @@ def synthesize(np.ndarray[double, ndim=1, mode="c"] f0 not None,
 def wav2world(x, fs, frame_period=default_frame_period):
     """Convenience function to do all WORLD analysis steps in a single call.
 
-    In this case only `frame_period` can be configured and other parameters 
-    are fixed to their defaults. Likewise, F0 estimation is fixed to 
+    In this case only `frame_period` can be configured and other parameters
+    are fixed to their defaults. Likewise, F0 estimation is fixed to
     DIO plus StoneMask refinement.
 
     Parameters
