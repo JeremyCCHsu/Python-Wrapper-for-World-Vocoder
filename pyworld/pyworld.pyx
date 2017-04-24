@@ -1,3 +1,4 @@
+from __future__ import division
 import cython
 
 import numpy as np
@@ -126,9 +127,9 @@ def dio(np.ndarray[double, ndim=1, mode="c"] x not None, int fs,
     option.speed = speed
     f0_length = GetSamplesForDIO(fs, x_length, option.frame_period)
     cdef np.ndarray[double, ndim=1, mode="c"] f0 = \
-        np.zeros(f0_length, dtype = np.dtype('float64'))
+        np.zeros(f0_length, dtype=np.dtype('float64'))
     cdef np.ndarray[double, ndim=1, mode="c"] temporal_positions = \
-        np.zeros(f0_length, dtype = np.dtype('float64'))
+        np.zeros(f0_length, dtype=np.dtype('float64'))
     Dio(&x[0], x_length, fs, &option, &temporal_positions[0], &f0[0])
     return f0, temporal_positions
 
@@ -169,9 +170,9 @@ def harvest(np.ndarray[double, ndim=1, mode="c"] x not None, int fs,
     option.frame_period = frame_period
     f0_length = GetSamplesForHarvest(fs, x_length, option.frame_period)
     cdef np.ndarray[double, ndim=1, mode="c"] f0 = \
-        np.zeros(f0_length, dtype = np.dtype('float64'))
+        np.zeros(f0_length, dtype=np.dtype('float64'))
     cdef np.ndarray[double, ndim=1, mode="c"] temporal_positions = \
-        np.zeros(f0_length, dtype = np.dtype('float64'))
+        np.zeros(f0_length, dtype=np.dtype('float64'))
     Harvest(&x[0], x_length, fs, &option, &temporal_positions[0], &f0[0])
     return f0, temporal_positions
 
@@ -201,7 +202,7 @@ def stonemask(np.ndarray[double, ndim=1, mode="c"] x not None,
     cdef int x_length = <int>len(x)
     cdef int f0_length = <int>len(f0)
     cdef np.ndarray[double, ndim=1, mode="c"] refined_f0 = \
-        np.zeros(f0_length, dtype = np.dtype('float64'))
+        np.zeros(f0_length, dtype=np.dtype('float64'))
     StoneMask(&x[0], x_length, fs, &temporal_positions[0],
         &f0[0], f0_length, &refined_f0[0])
     return refined_f0
@@ -233,7 +234,7 @@ def cheaptrick(np.ndarray[double, ndim=1, mode="c"] x not None,
                np.ndarray[double, ndim=1, mode="c"] f0 not None,
                np.ndarray[double, ndim=1, mode="c"] temporal_positions not None,
                int fs,
-	           q1=-0.15, f0_floor=default_f0_floor, fft_size=None):
+               q1=-0.15, f0_floor=default_f0_floor, fft_size=None):
     """CheapTrick harmonic spectral envelope estimation algorithm.
 
     Parameters
@@ -255,13 +256,13 @@ def cheaptrick(np.ndarray[double, ndim=1, mode="c"] x not None,
     fft_size : int, None
         FFT size to be used. When `None` (default) is used, the FFT size is computed
         automatically as a function of the given input sample rate and F0 floor.
-        When a specific FFT size is specified, the given `f0_floor` parameter is ignored.
+        When `fft_size` is specified, the given `f0_floor` parameter is ignored.
         Default: None
 
     Returns
     -------
     spectrogram : ndarray
-        Spectral envelope.
+        Spectral envelope (squared magnitude).
     """
     cdef CheapTrickOption option
     InitializeCheapTrickOption(fs, &option)
@@ -275,7 +276,8 @@ def cheaptrick(np.ndarray[double, ndim=1, mode="c"] x not None,
     cdef int x_length = <int>len(x)
     cdef int f0_length = <int>len(f0)
 
-    cdef double[:,::1] spectrogram = np.zeros((f0_length, option.fft_size/2+1))
+    cdef double[:, ::1] spectrogram = np.zeros((f0_length, option.fft_size//2 + 1),
+                                               dtype=np.dtype('float64'))
     cdef np.intp_t[:] tmp = np.zeros(f0_length, dtype=np.intp)
     cdef double **cpp_spectrogram = <double**> (<void*> &tmp[0])
     cdef np.intp_t i
@@ -319,14 +321,15 @@ def d4c(np.ndarray[double, ndim=1, mode="c"] x not None,
     fft_size : int, None
         FFT size to be used. When `None` (default) is used, the FFT size is computed
         automatically as a function of the given input sample rate and the default F0 floor.
-        When a specific FFT size is specified, it should generally match the FFT size used
-        to compute the spectral envelope (i.e. `ftt_size=sp.shape[1]`) to be able to resynthesize.
+        When `fft_size` is specified, it should match the FFT size used to compute
+        the spectral envelope (i.e. `fft_size=2*(sp.shape[1] - 1)`) in order to get the
+        desired results when resynthesizing.
         Default: None
 
     Returns
     -------
-    spectrogram : ndarray
-        Spectral envelope.
+    aperiodicity : ndarray
+        Aperiodicity (envelope, linear magnitude relative to spectral envelope).
     """
     cdef int x_length = <int>len(x)
     cdef int f0_length = <int>len(f0)
@@ -340,7 +343,8 @@ def d4c(np.ndarray[double, ndim=1, mode="c"] x not None,
     InitializeD4COption(&option)
     option.threshold = threshold
 
-    cdef double[:,::1] aperiodicity = np.zeros((f0_length, fft_size0/2+1))
+    cdef double[:, ::1] aperiodicity = np.zeros((f0_length, fft_size0//2 + 1),
+                                                dtype=np.dtype('float64'))
     cdef np.intp_t[:] tmp = np.zeros(f0_length, dtype=np.intp)
     cdef double **cpp_aperiodicity = <double**> (<void*> &tmp[0])
     cdef np.intp_t i
@@ -379,22 +383,33 @@ def synthesize(np.ndarray[double, ndim=1, mode="c"] f0 not None,
     y : ndarray
         Output waveform signal.
     """
+    if (f0.shape[0] != spectrogram.shape[0] or
+        f0.shape[0] != aperiodicity.shape[0]):
+        raise ValueError('Mismatched number of frames between F0 ({:d}), '
+                         'spectrogram ({:d}) and aperiodicty ({:d})'
+                         .format(f0.shape[0], spectrogram.shape[0], 
+                                 aperiodicity.shape[0]))
+    if spectrogram.shape[1] != aperiodicity.shape[1]:
+        raise ValueError('Mismatched dimensionality (spec size) between '
+                         'spectrogram ({:d}) and aperiodicity ({:d})'
+                         .format(spectrogram.shape[1], aperiodicity.shape[1]))
+
     cdef int f0_length = <int>len(f0)
     y_length = int(f0_length * frame_period * fs / 1000)
     cdef int fft_size = (<int>spectrogram.shape[1] - 1)*2
     cdef np.ndarray[double, ndim=1, mode="c"] y = \
-        np.zeros(y_length, dtype = np.dtype('float64'))
+        np.zeros(y_length, dtype=np.dtype('float64'))
 
-    cdef double[:,::1] spectrogram0 = spectrogram
-    cdef double[:,::1] aperiodicity0 = aperiodicity
+    cdef double[:, ::1] spectrogram0 = spectrogram
+    cdef double[:, ::1] aperiodicity0 = aperiodicity
     cdef np.intp_t[:] tmp = np.zeros(f0_length, dtype=np.intp)
     cdef np.intp_t[:] tmp2 = np.zeros(f0_length, dtype=np.intp)
     cdef double **cpp_spectrogram = <double**> (<void*> &tmp[0])
     cdef double **cpp_aperiodicity = <double**> (<void*> &tmp2[0])
     cdef np.intp_t i
     for i in range(f0_length):
-        cpp_spectrogram[i] = &spectrogram0[i,0]
-        cpp_aperiodicity[i] = &aperiodicity0[i,0]
+        cpp_spectrogram[i] = &spectrogram0[i, 0]
+        cpp_aperiodicity[i] = &aperiodicity0[i, 0]
 
     Synthesis(&f0[0], f0_length, cpp_spectrogram,
         cpp_aperiodicity, fft_size, frame_period, fs, y_length, &y[0])
