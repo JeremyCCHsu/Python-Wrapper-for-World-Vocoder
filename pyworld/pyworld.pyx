@@ -77,7 +77,12 @@ cdef extern from "world/codec.h":
         int fs, int fft_size, double **coded_aperiodicity)
     void DecodeAperiodicity(const double * const *coded_aperiodicity,
         int f0_length, int fs, int fft_size, double **aperiodicity)
-
+    void CodeSpectralEnvelope(const double * const *spectrogram, int f0_length,
+        int fs, int fft_size, int number_of_dimensions,
+        double **coded_spectral_envelope)
+    void DecodeSpectralEnvelope(const double * const *coded_spectral_envelope,
+        int f0_length, int fs, int fft_size, int number_of_dimensions,
+        double **spectrogram)
 
 default_frame_period = 5.0
 default_f0_floor = 71.0
@@ -539,6 +544,80 @@ def decode_aperiodicity(np.ndarray[double, ndim=2, mode="c"] coded_aperiodicity,
 
     return np.array(aper, dtype=np.float64)
 
+def code_spectral_envelope(np.ndarray[double, ndim=2, mode="c"] spectrogram, fs,
+                           number_of_dimensions):
+    """Reduce dimensionality of spectral envelope.
+
+    Parameters
+    ----------
+    spectrogram : ndarray
+        Spectral envelope.
+    fs : int
+        Sample rate of input signal in Hz.
+    number_of_dimensions : int
+        Number of dimentions of coded spectral envelope
+
+    Returns
+    -------
+    coded_spectral_envelope : ndarray
+        Coded spectral envelope.
+    """
+    cdef int sp_length = <int>len(spectrogram)
+    cdef int fft_size = (<int>spectrogram.shape[1] - 1)*2
+
+    cdef double[:, ::1] sp = spectrogram
+    cdef double[:, ::1] coded_sp = np.zeros((sp_length, number_of_dimensions),
+                                              dtype=np.dtype('float64'))
+    cdef np.intp_t[:] tmp1 = np.zeros(sp_length, dtype=np.intp)
+    cdef np.intp_t[:] tmp2 = np.zeros(sp_length, dtype=np.intp)
+    cdef double **cpp_sp = <double**> (<void*> &tmp1[0])
+    cdef double **cpp_coded_sp = <double**> (<void*> &tmp2[0])
+    cdef np.intp_t i
+    for i in range(sp_length):
+        cpp_sp[i] = &sp[i, 0]
+        cpp_coded_sp[i] = &coded_sp[i, 0]
+
+    CodeSpectralEnvelope(cpp_sp, sp_length, fs, fft_size,
+      number_of_dimensions, cpp_coded_sp)
+
+    return np.array(coded_sp, dtype=np.float64)
+
+def decode_spectral_envelope(np.ndarray[double, ndim=2, mode="c"] coded_spectral_envelope,
+                             fs, fft_size):
+    """Restore full dimensionality of coded spectral envelope.
+
+    Parameters
+    ----------
+    coded_spectral_envelope : ndarray
+        Coded spectral envelope.
+    fs : int
+        Sample rate of input signal in Hz.
+    fft_size : int
+        FFT size corresponding to the full dimensional spectral envelope.
+
+    Returns
+    -------
+    spectrogram : ndarray
+        Spectral envelope.
+    """
+    cdef int sp_length = <int>len(coded_spectral_envelope)
+    cdef int number_of_dimensions = <int>len(coded_spectral_envelope[0])
+    cdef double[:, ::1] coded_sp = coded_spectral_envelope
+    cdef double[:, ::1] sp = np.zeros((sp_length, fft_size//2 + 1),
+                                        dtype=np.dtype('float64'))
+    cdef np.intp_t[:] tmp1 = np.zeros(sp_length, dtype=np.intp)
+    cdef np.intp_t[:] tmp2 = np.zeros(sp_length, dtype=np.intp)
+    cdef double **cpp_coded_sp = <double**> (<void*> &tmp1[0])
+    cdef double **cpp_sp = <double**> (<void*> &tmp2[0])
+    cdef np.intp_t i
+    for i in range(sp_length):
+        cpp_coded_sp[i] = &coded_sp[i, 0]
+        cpp_sp[i] = &sp[i, 0]
+
+    DecodeSpectralEnvelope(cpp_coded_sp, sp_length, fs, fft_size,
+      number_of_dimensions, cpp_sp)
+
+    return np.array(sp, dtype=np.float64)
 
 def wav2world(x, fs, frame_period=default_frame_period):
     """Convenience function to do all WORLD analysis steps in a single call.
