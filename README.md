@@ -47,17 +47,19 @@ cd Python-Wrapper-for-World-Vocoder
 git submodule update --init
 pip install -U pip
 pip install -r requirements.txt
-python setup.py install
+pip install .
 ```
 It will automatically `git clone` Morise's World Vocoder (C++ version).<br/>
-As for installation mode (the last line), you can choose from the following options.
+It seems to me that using `virtualenv` or `conda` is the best practice.<br/>
 
 
-### Installation Mode
-1. If you want to "install" this package, try<br/>
+### Other Installation Suggestions
+1. Use `pip install .` is safer and you can easily uninstall pyworld by `pip uninstall pyworld`
+2. Another way to install pyworld is via<br/>
    `python setup.py install`<br/>
-   (add `--user` if you don't have root access)
-2. If you just want to try out some experiments, execute<br/>
+   - Add `--user` if you don't have root access<br/>
+   - Add `--record install.txt` to track the installation dir<br/>
+3. If you just want to try out some experiments, execute<br/>
   `python setup.py build_ext --inplace`<br/>
   Then you can use PyWorld from this directory.<br/>
   You can also copy the resulting **pyworld.so** (pyworld.{arch}.pyd on Windows) file to
@@ -96,7 +98,7 @@ to see if you get results in `test/` direcotry.
    Unzip it, and `python setup.py install` it.<br/>
    (I tried `pip install Cython` but the upgrade didn't seem correct)<br/>
    (Again, add `--user` if you don't have root access.)
-2. The following code might be needed in some configurations:
+2. Upon executing `demo/demo.py`, the following code might be needed in some environments (e.g. when you're working on a remote Linux server):<br/>
 
  ```python
  import matplotlib
@@ -104,7 +106,7 @@ to see if you get results in `test/` direcotry.
  ```
 3. If you encounter `library not found: sndfile` error upon executing `demo.py`,  
    you might have to install it by `apt-get install libsoundfile1`.  
-   You can also replace `pysoundfile` with `scipy` or `librosa`.   
+   You can also replace `pysoundfile` with `scipy` or `librosa`, but some modification is needed:   
    - librosa:
      - load(fiilename, dtype=np.float64)
      - output.write_wav(filename, wav, fs)
