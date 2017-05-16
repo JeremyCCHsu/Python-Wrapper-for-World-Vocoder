@@ -50,8 +50,15 @@ pip install -r requirements.txt
 pip install .
 ```
 It will automatically `git clone` Morise's World Vocoder (C++ version).<br/>
-It seems to me that using `virtualenv` or `conda` is the best practice.<br/>
-
+(It seems to me that using `virtualenv` or `conda` is the best practice.)<br/>
+<br/>
+You can validate installation by running
+```bash
+cd demo
+python demo.py
+```
+to see if you get results in `test/` direcotry.
+(Please avoid writing and executing codes in the `Python-Wrapper-for-World-Vocoder` folder for now.)<br/>
 
 ### Other Installation Suggestions
 1. Use `pip install .` is safer and you can easily uninstall pyworld by `pip uninstall pyworld`
@@ -83,12 +90,6 @@ It seems to me that using `virtualenv` or `conda` is the best practice.<br/>
     - Matplotlib
 
 You can simply install these by `pip install -r requirements.txt`
-
-
-### Validation
-You can validate installation by running
-`python demo.py`
-to see if you get results in `test/` direcotry.
 
 
 ## Troubleshooting
