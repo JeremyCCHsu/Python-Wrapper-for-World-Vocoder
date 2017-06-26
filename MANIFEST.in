@@ -1,0 +1,2 @@
+recursive-include lib *.cpp *.h LICENSE.txt
+recursive-include pyworld *.cpp *.pxd *.pyx
