@@ -37,10 +37,16 @@ y = pw.synthesize(f0, sp, ap, fs)
 # Convert speech into features (using default options)
 f0, sp, ap = pw.wav2world(x, fs)
 ```
+<br/>
 
 
 ## II. Installation
-### Installation procedures
+
+### Pip installation
+`pip install pyworld`  
+<br/>
+
+### Installing from Github
 ```bash
 git clone https://github.com/JeremyCCHsu/Python-Wrapper-for-World-Vocoder.git
 cd Python-Wrapper-for-World-Vocoder

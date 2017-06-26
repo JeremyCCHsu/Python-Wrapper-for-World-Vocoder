@@ -49,7 +49,7 @@ setup(
     name="pyworld",
     ext_modules=ext_modules,
     cmdclass=cmdclass,
-    version='0.2.1',
+    version='0.2.1b',
     packages=find_packages(),
     install_requires=[
         'numpy',
@@ -61,6 +61,7 @@ setup(
     author="Pyworld Contributors",
     author_email="jeremycchsu@gmail.com",
     url="https://github.com/JeremyCCHsu/Python-Wrapper-for-World-Vocoder",
-    download_url="",
     description="a Python wrapper for the WORLD vocoder",
+    keywords = ['vocoder'],
+    classifiers = [],
 )

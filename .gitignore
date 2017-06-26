@@ -2,6 +2,7 @@ test/
 *.cpp
 *.pyd
 .pypirc
+.vscode
 
 # Created by https://www.gitignore.io
 
