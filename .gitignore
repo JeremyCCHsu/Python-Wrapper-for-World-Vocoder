@@ -1,6 +1,7 @@
 test/
 *.cpp
 *.pyd
+.pypirc
 
 # Created by https://www.gitignore.io
 
