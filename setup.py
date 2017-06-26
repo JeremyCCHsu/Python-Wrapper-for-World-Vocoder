@@ -49,7 +49,7 @@ setup(
     name="pyworld",
     ext_modules=ext_modules,
     cmdclass=cmdclass,
-    version='0.2.1a',
+    version='0.2.1b',
     packages=find_packages(),
     install_requires=[
         'numpy',
