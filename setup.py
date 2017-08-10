@@ -19,7 +19,8 @@ class build_ext(_build_ext):
         self.include_dirs.append(numpy.get_include())
 
 # # This can be loosen probably, though it's fine I think
-# min_cython_ver = '0.24.0'
+min_cython_ver = '0.24.0'
+
 # try:
 #     import Cython
 #     ver = Cython.__version__
@@ -60,23 +61,24 @@ setup(
     name="pyworld",
     ext_modules=ext_modules,
     # cmdclass=cmdclass,
-    
     cmdclass={'build_ext':build_ext},
-
     version='0.2.2',
     packages=find_packages(),
     setup_requires=[
         'numpy',
-    #     'cython>=0.24.0',
+        'cython >= ' + min_cython_ver,
     ],
     install_requires=[
         'numpy',
-        'cython>=0.24.0',
+        'cython >= ' + min_cython_ver,        
     ],
     extras_require={
         'test': ['nose'],
         # 'develop': ['cython >= ' + min_cython_ver],
-        'sdist': ['numpy', 'cython'],
+        'sdist': [
+            'numpy', 
+            'cython >= ' + min_cython_ver,
+        ],
     },
     author="Pyworld Contributors",
     author_email="jeremycchsu@gmail.com",
