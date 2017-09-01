@@ -14,7 +14,7 @@ init:
 
 install:
   - ps: $ErrorActionPreference = "Stop"
-  - ps: git submodule update --init
+  # - ps: git submodule --init update
   - ps: |
       Write-Output "Updating pip..."
       pip install -U pip
@@ -24,14 +24,14 @@ install:
   - ps: |
       Write-Output "Installing requirements..."
       pip install -r requirements.txt
-  - ps: |
-      Write-Output "Installing PyWorld..."
-      python setup.py install
+  # - ps: |
+  #     Write-Output "Installing PyWorld..."
+  #     python setup.py install
   
-# build_script:
-#   # - ps: Write-Output "Cloning submodules..."
-#   - git submodule update --init
-#   - pip install -e .
+build_script:
+  # - ps: Write-Output "Cloning submodules..."
+  - git submodule update --init
+  - pip install -e .
 
 test_script:
   - ps: |
