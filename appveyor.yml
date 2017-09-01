@@ -12,7 +12,7 @@ init:
 install:
   - ps: $ErrorActionPreference = "Stop"
   - ps: Write-Output "Cloning submodules..."
-  - ps: git submodule --init update
+  # - ps: git submodule --init update
   - ps: |
       Write-Output "Updating pip..."
       pip install -U pip
@@ -25,7 +25,11 @@ install:
   - ps: |
       Write-Output "Installing PyWorld..."
       python setup.py install
-      
+
+build_script:
+  - git submodule --init update
+  - pip install -e .
+
 test_script:
   - ps: |
       $ErrorActionPreference = "Stop"
