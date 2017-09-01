@@ -4,34 +4,34 @@ environment:
       PYTHON_VERSION: 3.6
     - PYTHON_ROOT: C:\Python27-x64
       PYTHON_VERSION: 2.7
+
 platform: x64
+
 init:
   - ps: |
       Write-Output "*** Python $env:PYTHON_VERSION ***"
       $env:Path += ";$env:PYTHON_ROOT;$env:PYTHON_ROOT\Scripts"
-install:
-  # - ps: $ErrorActionPreference = "Stop"
-  # - ps: git submodule --init update
-  # - ps: |
-  #     Write-Output "Updating pip..."
-  #     pip install -U pip
-  # - ps: |
-  #     Write-Output "Installing wheel..."
-  #     pip install wheel
-  # - ps: |
-  #     Write-Output "Installing requirements..."
-  #     pip install -r requirements.txt
-  # - ps: |
-  #     Write-Output "Installing PyWorld..."
-  #     python setup.py install
-- ps: |
-      Write-Output "Empty test"
-  
 
-build_script:
-  # - ps: Write-Output "Cloning submodules..."
-  - git submodule update --init
-  - pip install -e .
+install:
+  - ps: $ErrorActionPreference = "Stop"
+  - ps: git submodule update --init
+  - ps: |
+      Write-Output "Updating pip..."
+      pip install -U pip
+  - ps: |
+      Write-Output "Installing wheel..."
+      pip install wheel
+  - ps: |
+      Write-Output "Installing requirements..."
+      pip install -r requirements.txt
+  - ps: |
+      Write-Output "Installing PyWorld..."
+      python setup.py install
+  
+# build_script:
+#   # - ps: Write-Output "Cloning submodules..."
+#   - git submodule update --init
+#   - pip install -e .
 
 test_script:
   - ps: |
