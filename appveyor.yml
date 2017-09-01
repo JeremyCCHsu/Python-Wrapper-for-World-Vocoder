@@ -1,11 +1,22 @@
 environment:
   matrix:
-    - PYTHON_ROOT: C:\Python36-x64
-      PYTHON_VERSION: 3.6
-    - PYTHON_ROOT: C:\Python27-x64
-      PYTHON_VERSION: 2.7
+    - PYTHON_VERSION: "2.7"
+      PYTHON_ARCH: "32"
+      MINICONDA: C:\Miniconda
 
-platform: x64
+    - PYTHON_VERSION: "2.7"
+      PYTHON_ARCH: "64"
+      MINICONDA: C:\Miniconda-x64
+
+    - PYTHON_VERSION: "3.6"
+      PYTHON_ARCH: "32"
+      MINICONDA: C:\Miniconda3
+
+    - PYTHON_VERSION: "3.6"
+      PYTHON_ARCH: "64"
+      MINICONDA: C:\Miniconda3-x64
+      
+# platform: x64
 
 init:
   - ps: |
@@ -13,14 +24,21 @@ init:
       $env:Path += ";$env:PYTHON_ROOT;$env:PYTHON_ROOT\Scripts"
 
 install:
-  - ps: $ErrorActionPreference = "Stop"
-  # - ps: git submodule --init update
-  - ps: |
-      Write-Output "Updating pip..."
-      pip install -U pip
-  - ps: |
-      Write-Output "Installing wheel..."
-      pip install wheel
+  - "SET PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
+  - conda config --set always_yes yes  --set changeps1 no
+  - conda update -q conda
+  - conda config --add channels pypi
+  - conda info -a
+  - "conda create -q -n test-environment python=%PYTHON_VERSION% numpy cython wheel"
+  - activate test-environment
+  # - ps: $ErrorActionPreference = "Stop"
+  # # - ps: git submodule --init update
+  # - ps: |
+  #     Write-Output "Updating pip..."
+  #     pip install -U pip
+  # - ps: |
+  #     Write-Output "Installing wheel..."
+  #     pip install wheel
   - ps: |
       Write-Output "Installing requirements..."
       pip install -r requirements.txt
