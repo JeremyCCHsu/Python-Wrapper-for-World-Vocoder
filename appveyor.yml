@@ -7,14 +7,12 @@ environment:
 platform: x64
 init:
   - ps: |
-      $ErrorActionPreference = "Stop"
       Write-Output "*** Python $env:PYTHON_VERSION ***"
       $env:Path += ";$env:PYTHON_ROOT;$env:PYTHON_ROOT\Scripts"
 install:
   - ps: $ErrorActionPreference = "Stop"
   - ps: Write-Output "Cloning submodules..."
-  - ps: git submodule init
-  - ps: git submodule update
+  - ps: git submodule --init update
   - ps: |
       Write-Output "Updating pip..."
       pip install -U pip
