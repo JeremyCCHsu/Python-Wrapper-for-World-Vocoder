@@ -10,23 +10,26 @@ init:
       Write-Output "*** Python $env:PYTHON_VERSION ***"
       $env:Path += ";$env:PYTHON_ROOT;$env:PYTHON_ROOT\Scripts"
 install:
-  - ps: $ErrorActionPreference = "Stop"
-  - ps: Write-Output "Cloning submodules..."
+  # - ps: $ErrorActionPreference = "Stop"
   # - ps: git submodule --init update
-  - ps: |
-      Write-Output "Updating pip..."
-      pip install -U pip
-  - ps: |
-      Write-Output "Installing wheel..."
-      pip install wheel
-  - ps: |
-      Write-Output "Installing requirements..."
-      pip install -r requirements.txt
-  - ps: |
-      Write-Output "Installing PyWorld..."
-      python setup.py install
+  # - ps: |
+  #     Write-Output "Updating pip..."
+  #     pip install -U pip
+  # - ps: |
+  #     Write-Output "Installing wheel..."
+  #     pip install wheel
+  # - ps: |
+  #     Write-Output "Installing requirements..."
+  #     pip install -r requirements.txt
+  # - ps: |
+  #     Write-Output "Installing PyWorld..."
+  #     python setup.py install
+- ps: |
+      Write-Output "Empty test"
+  
 
 build_script:
+  # - ps: Write-Output "Cloning submodules..."
   - git submodule --init update
   - pip install -e .
 
@@ -35,8 +38,9 @@ test_script:
       $ErrorActionPreference = "Stop"
       Set-Location "$env:APPVEYOR_BUILD_FOLDER\demo"
       python demo.py
+
 after_test:
-  - ps: |
-        python setup.py bdist_wheel
+  - python setup.py bdist_wheel
+
 artifacts:
   - path: dist\*
