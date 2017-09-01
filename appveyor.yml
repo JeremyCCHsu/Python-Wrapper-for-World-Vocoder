@@ -30,7 +30,7 @@ install:
 
 build_script:
   # - ps: Write-Output "Cloning submodules..."
-  - git submodule --init update
+  - git submodule update --init
   - pip install -e .
 
 test_script:
