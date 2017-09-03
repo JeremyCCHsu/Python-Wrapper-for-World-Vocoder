@@ -1,0 +1,57 @@
+environment:
+  matrix:
+    - PYTHON_VERSION: "3.6"
+      PYTHON_ARCH: "64"
+      MINICONDA: C:\Miniconda3-x64
+      
+    - PYTHON_VERSION: "3.6"
+      PYTHON_ARCH: "32"
+      MINICONDA: C:\Miniconda3
+
+# platform: x64
+
+init:
+  - ps: |
+      Write-Output "*** Python $env:PYTHON_VERSION ***"
+      $env:Path += ";$env:PYTHON_ROOT;$env:PYTHON_ROOT\Scripts"
+
+install:
+  - "SET PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
+  - conda config --set always_yes yes  --set changeps1 no
+  - conda update -q conda
+  - conda config --add channels pypi
+  - conda info -a
+  - "conda create -q -n test-environment python=%PYTHON_VERSION% numpy cython wheel"
+  - activate test-environment
+  # - ps: $ErrorActionPreference = "Stop"
+  # # - ps: git submodule --init update
+  # - ps: |
+  #     Write-Output "Updating pip..."
+  #     pip install -U pip
+  # - ps: |
+  #     Write-Output "Installing wheel..."
+  #     pip install wheel
+  - ps: |
+      Write-Output "Installing requirements..."
+      pip install -r requirements.txt
+  # - ps: |
+  #     Write-Output "Installing PyWorld..."
+  #     python setup.py install
+  
+build_script:
+  # - ps: Write-Output "Cloning submodules..."
+  - git submodule update --init
+  - pip install -e .
+
+test_script:
+  - ps: |
+      $ErrorActionPreference = "Stop"
+      Set-Location "$env:APPVEYOR_BUILD_FOLDER\demo"
+      python demo.py
+      Set-Location "$env:APPVEYOR_BUILD_FOLDER"
+
+after_test:
+  - python setup.py bdist_wheel
+
+artifacts:
+  - path: dist\*
