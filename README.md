@@ -1,9 +1,9 @@
 # PyWorldVocoder - A Python wrapper for World Vocoder
 
 
-| **`Linux`** |
-|-----------------|
-| [![Build Status](https://travis-ci.org/JeremyCCHsu/Python-Wrapper-for-World-Vocoder.svg?branch=master)](https://travis-ci.org/JeremyCCHsu/Python-Wrapper-for-World-Vocoder) |
+| **`Linux`** | **`Windows`** |
+|-----------------|-----------|
+| [![Build Status](https://travis-ci.org/JeremyCCHsu/Python-Wrapper-for-World-Vocoder.svg?branch=master)](https://travis-ci.org/JeremyCCHsu/Python-Wrapper-for-World-Vocoder) | [![Build Status](https://ci.appveyor.com/api/projects/status/github/JeremyCCHsu/Python-Wrapper-for-World-Vocoder?svg=true)](https://ci.appveyor.com/project/JeremyCCHsu/python-wrapper-for-world-vocoder) |
 
 
 Morise's World Vocoder is a fast and high-quality vocoder.
