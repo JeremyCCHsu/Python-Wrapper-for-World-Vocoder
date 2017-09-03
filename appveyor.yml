@@ -1,21 +1,13 @@
 environment:
   matrix:
-    - PYTHON_VERSION: "2.7"
-      PYTHON_ARCH: "32"
-      MINICONDA: C:\Miniconda
-
-    - PYTHON_VERSION: "2.7"
-      PYTHON_ARCH: "64"
-      MINICONDA: C:\Miniconda-x64
-
-    - PYTHON_VERSION: "3.6"
-      PYTHON_ARCH: "32"
-      MINICONDA: C:\Miniconda3
-
     - PYTHON_VERSION: "3.6"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda3-x64
       
+    - PYTHON_VERSION: "3.6"
+      PYTHON_ARCH: "32"
+      MINICONDA: C:\Miniconda3
+
 # platform: x64
 
 init:
@@ -56,6 +48,7 @@ test_script:
       $ErrorActionPreference = "Stop"
       Set-Location "$env:APPVEYOR_BUILD_FOLDER\demo"
       python demo.py
+      Set-Location "$env:APPVEYOR_BUILD_FOLDER"
 
 after_test:
   - python setup.py bdist_wheel
