@@ -1,9 +1,9 @@
 # PyWorldVocoder - A Python wrapper for World Vocoder
 
 
-| **`Linux`** |
-|-----------------|
-| [![Build Status](https://travis-ci.org/JeremyCCHsu/Python-Wrapper-for-World-Vocoder.svg?branch=master)](https://travis-ci.org/JeremyCCHsu/Python-Wrapper-for-World-Vocoder) |
+| **`Linux`** | **`Windows`** |
+|-----------------|-----------|
+| [![Build Status](https://travis-ci.org/JeremyCCHsu/Python-Wrapper-for-World-Vocoder.svg?branch=master)](https://travis-ci.org/JeremyCCHsu/Python-Wrapper-for-World-Vocoder) | [![Build Status](https://ci.appveyor.com/api/projects/status/github/JeremyCCHsu/Python-Wrapper-for-World-Vocoder?svg=true)](https://ci.appveyor.com/project/JeremyCCHsu/python-wrapper-for-world-vocoder) |
 
 
 Morise's World Vocoder is a fast and high-quality vocoder.
@@ -85,7 +85,7 @@ to see if you get results in `test/` direcotry.
   - Linux Ubuntu 16.04/14.04
   - Windows (thanks to [wuaalb](https://github.com/wuaalb))
 - Python
-  - 2.7
+  - 2.7 (Windows is currently not supported)
   - 3.6/3.5
   - Required packages
     - Cython 0.24 (or later versions; required)
