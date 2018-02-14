@@ -11,7 +11,7 @@ cdef extern from "world/synthesis.h":
         int f0_length, const double * const *spectrogram,
         const double * const *aperiodicity,
         int fft_size, double frame_period,
-        int fs, int y_length, double *y)
+        int fs, int y_length, double *y) except +
 
 
 cdef extern from "world/cheaptrick.h":
@@ -37,10 +37,10 @@ cdef extern from "world/dio.h":
         int speed
         double allowed_range
 
-    void InitializeDioOption(DioOption *option)
+    void InitializeDioOption(DioOption *option) except +
     int GetSamplesForDIO(int fs, int x_length, double frame_period)
     void Dio(const double *x, int x_length, int fs, const DioOption *option,
-        double *temporal_positions, double *f0)
+        double *temporal_positions, double *f0) except +
 
 
 cdef extern from "world/harvest.h":
@@ -52,37 +52,37 @@ cdef extern from "world/harvest.h":
     void InitializeHarvestOption(HarvestOption *option)
     int GetSamplesForHarvest(int fs, int x_length, double frame_period)
     void Harvest(const double *x, int x_length, int fs, const HarvestOption *option,
-        double *temporal_positions, double *f0)
+        double *temporal_positions, double *f0) except +
 
 
 cdef extern from "world/d4c.h":
     ctypedef struct D4COption:
         double threshold
 
-    void InitializeD4COption(D4COption *option)
+    void InitializeD4COption(D4COption *option) except +
     void D4C(const double *x, int x_length, int fs, const double *temporal_positions,
         const double *f0, int f0_length, int fft_size, const D4COption *option,
-        double **aperiodicity)
+        double **aperiodicity) except +
 
 
 cdef extern from "world/stonemask.h":
     void StoneMask(const double *x, int x_length, int fs,
         const double *temporal_positions, const double *f0, int f0_length,
-        double *refined_f0)
+        double *refined_f0) except +
 
 
 cdef extern from "world/codec.h":
     int GetNumberOfAperiodicities(int fs)
     void CodeAperiodicity(const double * const *aperiodicity, int f0_length,
-        int fs, int fft_size, double **coded_aperiodicity)
+        int fs, int fft_size, double **coded_aperiodicity) except +
     void DecodeAperiodicity(const double * const *coded_aperiodicity,
-        int f0_length, int fs, int fft_size, double **aperiodicity)
+        int f0_length, int fs, int fft_size, double **aperiodicity) except +
     void CodeSpectralEnvelope(const double * const *spectrogram, int f0_length,
         int fs, int fft_size, int number_of_dimensions,
-        double **coded_spectral_envelope)
+        double **coded_spectral_envelope) except +
     void DecodeSpectralEnvelope(const double * const *coded_spectral_envelope,
         int f0_length, int fs, int fft_size, int number_of_dimensions,
-        double **spectrogram)
+        double **spectrogram) except +
 
 default_frame_period = 5.0
 default_f0_floor = 71.0
