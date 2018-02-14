@@ -20,12 +20,12 @@ cdef extern from "world/cheaptrick.h":
         double f0_floor
         int fft_size
 
-    int GetFFTSizeForCheapTrick(int fs, const CheapTrickOption *option)
-    double GetF0FloorForCheapTrick(int fs, int fft_size)
-    void InitializeCheapTrickOption(int fs, CheapTrickOption *option)
+    int GetFFTSizeForCheapTrick(int fs, const CheapTrickOption *option) except +
+    double GetF0FloorForCheapTrick(int fs, int fft_size) except +
+    void InitializeCheapTrickOption(int fs, CheapTrickOption *option) except +
     void CheapTrick(const double *x, int x_length, int fs, const double *temporal_positions,
         const double *f0, int f0_length, const CheapTrickOption *option,
-        double **spectrogram)
+        double **spectrogram) except +
 
 
 cdef extern from "world/dio.h":
