@@ -60,8 +60,8 @@ setup(
     name="pyworld",
     ext_modules=ext_modules,
     # cmdclass=cmdclass,
-    cmdclass={'build_ext':build_ext},
-    version='0.2.2.dev1',
+    cmdclass={'build_ext': build_ext},
+    version='0.2.4',
     packages=find_packages(),
     setup_requires=[
         'numpy',
