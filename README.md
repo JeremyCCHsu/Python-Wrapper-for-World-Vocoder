@@ -86,7 +86,7 @@ to see if you get results in `test/` direcotry.
   - Windows (thanks to [wuaalb](https://github.com/wuaalb))
 - Python
   - 2.7 (Windows is currently not supported)
-  - 3.6/3.5
+  - 3.7/3.6/3.5
   - Required packages
     - Cython 0.24 (or later versions; required)
     - Numpy
