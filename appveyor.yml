@@ -52,7 +52,7 @@ after_test:
   - python setup.py bdist_wheel
   - ps: |
       $ErrorActionPreference = "Stop"
-      if($APPVEYOR_REPO_TAG -eq "true" -and $APPVEYOR_REPO_TAG_NAME -match "^v([0-9.]+)$") {
+      if($APPVEYOR_REPO_TAG -eq "true" -and $APPVEYOR_REPO_TAG_NAME -match "^v([0-9.a-z]+)$") {
         conda install -y twine
         python setup.py bdist_wheel
         twine upload dist\*

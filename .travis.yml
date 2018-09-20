@@ -24,6 +24,7 @@ script:
   - python demo.py
 
 deploy:
+  skip_cleanup: true
   provider: pypi
   user: JeremyCCHsu
   password:
