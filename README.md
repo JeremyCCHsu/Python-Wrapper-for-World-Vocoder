@@ -93,7 +93,7 @@ to see if you get results in `test/` direcotry.
   - Optional (for demo.py only)
     - argparse
     - pysoundfile
-    - Matplotlib
+    - Matplotlib 
 
 You can simply install these by `pip install -r requirements.txt`
 
