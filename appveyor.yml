@@ -1,7 +1,7 @@
 environment:
-  TWINE_USERNAME: JeremyCCHsu
-  TWINE_PASSWORD:
-    secure: BWuqmwqNcXcnw186+V8rqA==
+  - TWINE_USERNAME: JeremyCCHsu
+  - TWINE_PASSWORD:
+    - secure: BWuqmwqNcXcnw186+V8rqA==
 
   matrix:
     - PYTHON_VERSION: "3.6"
@@ -53,7 +53,14 @@ test_script:
 
 after_test:
   - python setup.py bdist_wheel
-
+  # - ps: |
+  #     $ErrorActionPreference = "Stop"
+  #     if($APPVEYOR_REPO_TAG -eq "true" -and $APPVEYOR_REPO_TAG_NAME -match "^v([0-9.a-z]+)$") {
+  #       conda install -y twine
+  #       python setup.py bdist_wheel
+  #       twine upload dist\*
+  #     }
+      
 artifacts:
   - path: dist\*
 
