@@ -1,16 +1,15 @@
-env:
-  global:
-    - TWINE_USERNAME: JeremyCCHsu
-    - TWINE_PASSWORD: 
-      secure: K22xeLmYvib1wUQyRJOQ+wjvFVK88HNCsGWVXdCFaIfR9F5QAKMmh+RsyKCS5JdMdZF+RtDDgcfsMOIlscGm/crgwzAN9OijKmj4WZGDPR4BY8O0TZGT2n1tfRJjGdmEwMfftmIfHRjX91iZjCW5k7EAwYvV0d+hAdUrSI1FGOKYPpMVusMYNih3AtPbobpTCwgaKddwCVw1YoCEEgSuXfpyZfQzEirEGViJfXr6EmojVoVYi1oYlw4OhAKg+OVfTxVEVsT37xbPp0sjcADYVWr1kXAWF86fGyon+eSHMc5AewoP8tMNSeqyZuQ23EHx2xuK8Ipjv3C0xy+RmMPBdsi5xhbclElNvBH3OjL623x5JYziU+rsckh/6687vFzLg5twlfRDfwFwKHA4UVdSP0Uei8ebltHJwufyKiKjVMllJpbc9NOKJjSF+n0/ddwaebYbWgeZo6wvOnvuZb1d3TyGUktNfdypINNkd6D/RFd6l3kN4IhvBJqP7bZsSsrFoIdDL6to005Hy1Jb8IuUFihFC5BbWcFqd3BefOvZWmhpkZJRkTEN6pCEf0oNFxtWL6NuxwkbVZVcBgKAHAAz/4rKh6r0IipqfWfxKU3N9Phz998LfNwK2ZkQ32gDYdJ5abTY7v50J6s99U4DzSOaD4c3NoYE/VxyW/G1yo2FclQ=
-
-
 language:
   - python
 
 python:
   - "2.7"
   - "3.6"
+
+env:
+  global:
+    - TWINE_USERNAME: JeremyCCHsu
+    - TWINE_PASSWORD: 
+      secure: K22xeLmYvib1wUQyRJOQ+wjvFVK88HNCsGWVXdCFaIfR9F5QAKMmh+RsyKCS5JdMdZF+RtDDgcfsMOIlscGm/crgwzAN9OijKmj4WZGDPR4BY8O0TZGT2n1tfRJjGdmEwMfftmIfHRjX91iZjCW5k7EAwYvV0d+hAdUrSI1FGOKYPpMVusMYNih3AtPbobpTCwgaKddwCVw1YoCEEgSuXfpyZfQzEirEGViJfXr6EmojVoVYi1oYlw4OhAKg+OVfTxVEVsT37xbPp0sjcADYVWr1kXAWF86fGyon+eSHMc5AewoP8tMNSeqyZuQ23EHx2xuK8Ipjv3C0xy+RmMPBdsi5xhbclElNvBH3OjL623x5JYziU+rsckh/6687vFzLg5twlfRDfwFwKHA4UVdSP0Uei8ebltHJwufyKiKjVMllJpbc9NOKJjSF+n0/ddwaebYbWgeZo6wvOnvuZb1d3TyGUktNfdypINNkd6D/RFd6l3kN4IhvBJqP7bZsSsrFoIdDL6to005Hy1Jb8IuUFihFC5BbWcFqd3BefOvZWmhpkZJRkTEN6pCEf0oNFxtWL6NuxwkbVZVcBgKAHAAz/4rKh6r0IipqfWfxKU3N9Phz998LfNwK2ZkQ32gDYdJ5abTY7v50J6s99U4DzSOaD4c3NoYE/VxyW/G1yo2FclQ=
 
 matrix:
   include:
@@ -36,17 +35,3 @@ script:
       python setup.py sdist 
       twine upload dist/*
     fi
-
-# deploy:
-#   provider: pypi
-#   user: JeremyCCHsu
-#   password:
-#     secure: K22xeLmYvib1wUQyRJOQ+wjvFVK88HNCsGWVXdCFaIfR9F5QAKMmh+RsyKCS5JdMdZF+RtDDgcfsMOIlscGm/crgwzAN9OijKmj4WZGDPR4BY8O0TZGT2n1tfRJjGdmEwMfftmIfHRjX91iZjCW5k7EAwYvV0d+hAdUrSI1FGOKYPpMVusMYNih3AtPbobpTCwgaKddwCVw1YoCEEgSuXfpyZfQzEirEGViJfXr6EmojVoVYi1oYlw4OhAKg+OVfTxVEVsT37xbPp0sjcADYVWr1kXAWF86fGyon+eSHMc5AewoP8tMNSeqyZuQ23EHx2xuK8Ipjv3C0xy+RmMPBdsi5xhbclElNvBH3OjL623x5JYziU+rsckh/6687vFzLg5twlfRDfwFwKHA4UVdSP0Uei8ebltHJwufyKiKjVMllJpbc9NOKJjSF+n0/ddwaebYbWgeZo6wvOnvuZb1d3TyGUktNfdypINNkd6D/RFd6l3kN4IhvBJqP7bZsSsrFoIdDL6to005Hy1Jb8IuUFihFC5BbWcFqd3BefOvZWmhpkZJRkTEN6pCEf0oNFxtWL6NuxwkbVZVcBgKAHAAz/4rKh6r0IipqfWfxKU3N9Phz998LfNwK2ZkQ32gDYdJ5abTY7v50J6s99U4DzSOaD4c3NoYE/VxyW/G1yo2FclQ=
-#   on:
-#     tags: true
-#   skip_cleanup: true
-#   - ps: |
-#     if (1) {
-#       pip install twine
-#       twine upload dist/*
-#     }
