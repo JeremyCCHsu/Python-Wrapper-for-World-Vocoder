@@ -1,9 +1,14 @@
+env:
+  global:
+    - TWINE_USERNAME=JeremyCCHsu
+
 language:
   - python
 
 python:
   - "2.7"
   - "3.6"
+
 matrix:
   include:
     - python: 3.7
@@ -21,3 +26,9 @@ install:
 script:
   - cd demo
   - python demo.py
+  - |
+  if [[ $TRAVIS_TAG =~ ^v([0-9.]+)$ && $TRAVIS_PYTHON_VERSION == 3.6 ]]; then
+    pip install twine
+    python setup.py sdist 
+    twine dist/*
+  fi

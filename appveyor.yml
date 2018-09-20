@@ -1,4 +1,5 @@
 environment:
+  TWINE_USERNAME: JeremyCCHsu
   matrix:
     - PYTHON_VERSION: "3.6"
       PYTHON_ARCH: "64"
@@ -49,6 +50,12 @@ test_script:
 
 after_test:
   - python setup.py bdist_wheel
-
+  - ps: |
+    $ErrorActionPreference = "Stop"
+    if($APPVEYOR_REPO_TAG -eq "true" -and $APPVEYOR_REPO_TAG_NAME -match "^v([0-9.]+)$") {
+      conda install -y twine
+      python setup.py bdist_wheel
+      twine dist\*
+    }
 artifacts:
   - path: dist\*

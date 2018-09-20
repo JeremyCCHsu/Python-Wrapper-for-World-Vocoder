@@ -61,7 +61,7 @@ setup(
     ext_modules=ext_modules,
     # cmdclass=cmdclass,
     cmdclass={'build_ext': build_ext},
-    version='0.2.4',
+    version='0.2.5',
     packages=find_packages(),
     setup_requires=[
         'numpy',
