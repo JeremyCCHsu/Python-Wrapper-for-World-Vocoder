@@ -81,7 +81,7 @@ to see if you get results in `test/` direcotry.
   Alternatively you can copy/symlink the compiled files using pip, e.g. `pip install -e .`
 
 ### Environment/Dependencies  
-- Operating systems
+- Operating systems 
   - Linux Ubuntu 16.04/14.04
   - Windows (thanks to [wuaalb](https://github.com/wuaalb))
 - Python
