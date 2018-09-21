@@ -77,12 +77,16 @@ artifacts:
 #       twine upload dist\*.whl
 #     }
 
-deploy:
-  provider: pypi
-  user: JeremyCCHsu
-  password:
-    secure: BWuqmwqNcXcnw186+V8rqA==
-  # on:
-  #   tags: true
-  on:
-    appveyor_repo_tag: true
+deploy_script:
+  - pip install twine
+  - twine upload dist/*
+
+# deploy:
+#   provider: pypi
+#   user: JeremyCCHsu
+#   password:
+#     secure: BWuqmwqNcXcnw186+V8rqA==
+#   # on:
+#   #   tags: true
+#   on:
+#     appveyor_repo_tag: true
