@@ -29,9 +29,17 @@ script:
   - cd demo
   - python demo.py
   - cd ..
-  - |
-    if [[ $TRAVIS_TAG =~ ^v([0-9.a-z]+)$ && $TRAVIS_PYTHON_VERSION == 3.6 ]]; then
-      pip install twine
-      python setup.py sdist 
-      twine upload -u $TWINE_USERNAME -p $TWINE_PASSWORD dist/*
-    fi
+  # - |
+  #   if [[ $TRAVIS_TAG =~ ^v([0-9.a-z]+)$ && $TRAVIS_PYTHON_VERSION == 3.6 ]]; then
+  #     pip install twine
+  #     python setup.py sdist 
+  #     twine upload -u $TWINE_USERNAME -p $TWINE_PASSWORD dist/*
+  #   fi
+
+deploy:
+  provider: pypi
+  user: JeremyCCHsu
+  password:
+    secure: TF2TIoVXLBKc37ZJEgsBg/yZ46stIli5dmP7EqYTL3WJlpkeHqBkdKe1zfwicR3oupK0hU8T3C+45Ac7NbuAsTZnsi+Aw269GhFcUFIk1GAD+GWzSXdXuVEZfQPFO53XzRzA+d+TfvuxUx7EASV38sQNtJ9BWHfbji3lsedt9XoIpIbMF9zY2GT15kgOTCWFp3X3WHtNIu2D19TAJdPfFnuq1qiboAud81DTM0BedpKaWsaADnOBG8DuppBxDpV/9281Qdw1/UYwiCAR6uTVLfjHVF0tg1QX1/ZI0BvjUOcdvHlpp1TYIyQgb/lt3pvCcJZtE3E6iwPpRq2b0cVxRRPqFYqSS67AMXZN12MBom8Q6+CBg3QYUOPQAwoMB1S8d6WPn+yue5jdP4YZZ6Cch72CxXpqbcNecz/EnlPYVcWVD3v/ULxru18GqBuTce0CEkPx/yhNVdSusMvGCitaIVG4KSgkp/QuIjm+AcCkifh6jvU1J+XzhPi3VeGd9Od90QQJU4MOq1GA/3lH38NWPDOW1uLueBxL+YkSwQhe1r1dsq7b3eBucwKklG/dYVTKgtNZp13MJTRmKi3vSaJLH/0HxcLmwkcnCRs5KJHRv9igH778bFxau4Fz2xuho2wV/DvbscQ9Jvf/pTs89t9fFypnCX+kCkLke/wyseHC4sg=
+  on:
+    tags: true
