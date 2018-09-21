@@ -69,24 +69,10 @@ after_test:
 artifacts:
   - path: dist\*
 
-# deploy_script:
-#   - ps: |
-#     $ErrorActionPreference = "Stop"
-#     if ($APPVEYOR_REPO_TAG -eq "true" -and $APPVEYOR_REPO_TAG_NAME -match "^v([0-9.a-z]+)$") {
-#       pip install twine
-#       twine upload dist\*.whl
-#     }
-
 deploy_script:
-  - pip install twine
-  - twine upload dist/*
-
-# deploy:
-#   provider: pypi
-#   user: JeremyCCHsu
-#   password:
-#     secure: BWuqmwqNcXcnw186+V8rqA==
-#   # on:
-#   #   tags: true
-#   on:
-#     appveyor_repo_tag: true
+  - ps: |
+      $ErrorActionPreference = "Stop"
+      if ($APPVEYOR_REPO_TAG -eq "true" -and $APPVEYOR_REPO_TAG_NAME -match "^v([0-9.a-z]+)$") {
+        pip install twine
+        twine upload dist/*.whl
+      }
