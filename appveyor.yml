@@ -53,21 +53,21 @@ test_script:
 
 after_test:
   - python setup.py bdist_wheel
-  # - ps: |
-  #     $ErrorActionPreference = "Stop"
-  #     if($APPVEYOR_REPO_TAG -eq "true" -and $APPVEYOR_REPO_TAG_NAME -match "^v([0-9.a-z]+)$") {
-  #       conda install -y twine
-  #       python setup.py bdist_wheel
-  #       twine upload dist\*
-  #     }
+  - ps: |
+      $ErrorActionPreference = "Stop"
+      if($APPVEYOR_REPO_TAG -eq "true" -and $APPVEYOR_REPO_TAG_NAME -match "^v([0-9.a-z]+)$") {
+        conda install -y twine
+        python setup.py bdist_wheel
+        twine upload dist\*
+      }
       
 artifacts:
   - path: dist\*
 
-deploy_script:
-  - ps: |
-    $ErrorActionPreference = "Stop"
-    if ($APPVEYOR_REPO_TAG -eq "true" -and $APPVEYOR_REPO_TAG_NAME -match "^v([0-9.a-z]+)$") {
-      pip install twine
-      twine upload dist\*.whl
-    }
+# deploy_script:
+#   - ps: |
+#     $ErrorActionPreference = "Stop"
+#     if ($APPVEYOR_REPO_TAG -eq "true" -and $APPVEYOR_REPO_TAG_NAME -match "^v([0-9.a-z]+)$") {
+#       pip install twine
+#       twine upload dist\*.whl
+#     }
