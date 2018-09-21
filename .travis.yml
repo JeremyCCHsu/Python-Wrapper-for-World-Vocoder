@@ -33,5 +33,5 @@ script:
     if [[ $TRAVIS_TAG =~ ^v([0-9.a-z]+)$ && $TRAVIS_PYTHON_VERSION == 3.6 ]]; then
       pip install twine
       python setup.py sdist 
-      twine upload dist/*
+      twine upload -u $TWINE_USERNAME -p $TWINE_PASSWORD dist/*
     fi

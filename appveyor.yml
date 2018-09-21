@@ -65,7 +65,7 @@ artifacts:
   - path: dist\*
 
 deploy_script:
-  - ps: |
+  - |
     if ($APPVEYOR_REPO_TAG -eq "true" -and $APPVEYOR_REPO_TAG_NAME -match "^v([0-9.a-z]+)$") {
       pip install twine
       twine upload dist/*
