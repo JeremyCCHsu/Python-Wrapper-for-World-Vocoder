@@ -1,7 +1,7 @@
 environment:
-  - TWINE_USERNAME: JeremyCCHsu
-  - TWINE_PASSWORD:
-    - secure: BWuqmwqNcXcnw186+V8rqA==
+  TWINE_USERNAME: JeremyCCHsu
+  TWINE_PASSWORD:
+    secure: BWuqmwqNcXcnw186+V8rqA==
 
   matrix:
     - PYTHON_VERSION: "3.6"
