@@ -62,6 +62,8 @@ after_test:
       }
       else{
         "Not a tag (skipped)"
+        "APPVEYOR_REPO_TAG"
+        "APPVEYOR_REPO_TAG_NAME"
       }
       
 artifacts:
@@ -74,3 +76,13 @@ artifacts:
 #       pip install twine
 #       twine upload dist\*.whl
 #     }
+
+deploy:
+  provider: pypi
+  user: JeremyCCHsu
+  password:
+    secure: BWuqmwqNcXcnw186+V8rqA==
+  on:
+    tags: true
+  # on:
+  #   appveyor_repo_tag: true

@@ -29,17 +29,18 @@ script:
   - cd demo
   - python demo.py
   - cd ..
-  - |
-    if [[ $TRAVIS_TAG =~ ^v([0-9.a-z]+)$ && $TRAVIS_PYTHON_VERSION == 3.6 ]]; then
-      pip install twine
-      python setup.py sdist 
-      twine upload -u $TWINE_USERNAME -p $TWINE_PASSWORD dist/*
-    fi
+  # - |
+  #   if [[ $TRAVIS_TAG =~ ^v([0-9.a-z]+)$ && $TRAVIS_PYTHON_VERSION == 3.6 ]]; then
+  #     pip install twine
+  #     python setup.py sdist 
+  #     twine upload -u $TWINE_USERNAME -p $TWINE_PASSWORD dist/*
+  #   fi
 
-# deploy:
-#   provider: pypi
-#   user: JeremyCCHsu
-#   password:
-#     secure: K22xeLmYvib1wUQyRJOQ+wjvFVK88HNCsGWVXdCFaIfR9F5QAKMmh+RsyKCS5JdMdZF+RtDDgcfsMOIlscGm/crgwzAN9OijKmj4WZGDPR4BY8O0TZGT2n1tfRJjGdmEwMfftmIfHRjX91iZjCW5k7EAwYvV0d+hAdUrSI1FGOKYPpMVusMYNih3AtPbobpTCwgaKddwCVw1YoCEEgSuXfpyZfQzEirEGViJfXr6EmojVoVYi1oYlw4OhAKg+OVfTxVEVsT37xbPp0sjcADYVWr1kXAWF86fGyon+eSHMc5AewoP8tMNSeqyZuQ23EHx2xuK8Ipjv3C0xy+RmMPBdsi5xhbclElNvBH3OjL623x5JYziU+rsckh/6687vFzLg5twlfRDfwFwKHA4UVdSP0Uei8ebltHJwufyKiKjVMllJpbc9NOKJjSF+n0/ddwaebYbWgeZo6wvOnvuZb1d3TyGUktNfdypINNkd6D/RFd6l3kN4IhvBJqP7bZsSsrFoIdDL6to005Hy1Jb8IuUFihFC5BbWcFqd3BefOvZWmhpkZJRkTEN6pCEf0oNFxtWL6NuxwkbVZVcBgKAHAAz/4rKh6r0IipqfWfxKU3N9Phz998LfNwK2ZkQ32gDYdJ5abTY7v50J6s99U4DzSOaD4c3NoYE/VxyW/G1yo2FclQ=
-#   on:
-#     tags: true
+deploy:
+  provider: pypi
+  user: JeremyCCHsu
+  password:
+    secure: K22xeLmYvib1wUQyRJOQ+wjvFVK88HNCsGWVXdCFaIfR9F5QAKMmh+RsyKCS5JdMdZF+RtDDgcfsMOIlscGm/crgwzAN9OijKmj4WZGDPR4BY8O0TZGT2n1tfRJjGdmEwMfftmIfHRjX91iZjCW5k7EAwYvV0d+hAdUrSI1FGOKYPpMVusMYNih3AtPbobpTCwgaKddwCVw1YoCEEgSuXfpyZfQzEirEGViJfXr6EmojVoVYi1oYlw4OhAKg+OVfTxVEVsT37xbPp0sjcADYVWr1kXAWF86fGyon+eSHMc5AewoP8tMNSeqyZuQ23EHx2xuK8Ipjv3C0xy+RmMPBdsi5xhbclElNvBH3OjL623x5JYziU+rsckh/6687vFzLg5twlfRDfwFwKHA4UVdSP0Uei8ebltHJwufyKiKjVMllJpbc9NOKJjSF+n0/ddwaebYbWgeZo6wvOnvuZb1d3TyGUktNfdypINNkd6D/RFd6l3kN4IhvBJqP7bZsSsrFoIdDL6to005Hy1Jb8IuUFihFC5BbWcFqd3BefOvZWmhpkZJRkTEN6pCEf0oNFxtWL6NuxwkbVZVcBgKAHAAz/4rKh6r0IipqfWfxKU3N9Phz998LfNwK2ZkQ32gDYdJ5abTY7v50J6s99U4DzSOaD4c3NoYE/VxyW/G1yo2FclQ=
+  on:
+    tags: true
+  skip_existing: true
