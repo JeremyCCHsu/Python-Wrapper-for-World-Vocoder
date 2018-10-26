@@ -1,10 +1,9 @@
-"""
-PyWorld is a Python wrapper for WORLD vocoder.
+"""PyWorld is a Python wrapper for WORLD vocoder.
 
-WORLD is free software for high-quality speech analysis, manipulation and
-synthesis. It can estimate Fundamental frequency (F0), aperiodicity and
-spectral envelope and also generate the speech like input speech with only
-estimated parameters.
+PyWorld wrappers WORLD, which is a free software for high-quality speech
+analysis, manipulation and synthesis. It can estimate fundamental frequency (F0),
+aperiodicity and spectral envelope and also generate the speech like input speech
+with only estimated parameters.
 """
 
 
@@ -44,6 +43,7 @@ ext_modules = [
 setup(
     name="pyworld",
     description=DOCLINES,
+    long_description='\n'.join(DOCLINES[2:]),
     ext_modules=ext_modules,
     cmdclass={'build_ext': build_ext},
     version='0.2.5a',
@@ -62,7 +62,6 @@ setup(
     author="Pyworld Contributors",
     author_email="jeremycchsu@gmail.com",
     url="https://github.com/JeremyCCHsu/Python-Wrapper-for-World-Vocoder",
-    description="a Python wrapper for the WORLD vocoder",
     keywords=['vocoder'],
     classifiers=[],
 )
