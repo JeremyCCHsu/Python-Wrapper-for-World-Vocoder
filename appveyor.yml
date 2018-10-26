@@ -28,6 +28,12 @@ init:
       $env:Path += ";$env:PYTHON_ROOT;$env:PYTHON_ROOT\Scripts"
 
 install:
+  - ps: |
+      "INFO: Variables"
+      "INFO: is a tag: $Env:APPVEYOR_REPO_TAG"
+      "INFO: $APPVEYOR_REPO_TAG"
+      "INFO: tag name: $Env:APPVEYOR_REPO_TAG_NAME"
+      "INFO: $APPVEYOR_REPO_TAG_NAME"
   - "SET PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
   - conda config --set always_yes yes  --set changeps1 no
   - conda update -q conda
@@ -72,7 +78,7 @@ artifacts:
 deploy_script:
   - ps: |
       $ErrorActionPreference = "Stop"
-      if ($APPVEYOR_REPO_TAG -eq "true" -and $APPVEYOR_REPO_TAG_NAME -match "^v([0-9.a-z]+)$") {
+      if ($Env:APPVEYOR_REPO_TAG -eq "true"){
         pip install twine
         twine upload dist/*.whl
       }
@@ -81,3 +87,4 @@ deploy_script:
         "$APPVEYOR_REPO_TAG"
         "$APPVEYOR_REPO_TAG_NAME"
       }
+# -and $APPVEYOR_REPO_TAG_NAME -match "^v([0-9.a-z]+)$") {
