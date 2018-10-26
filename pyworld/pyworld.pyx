@@ -84,9 +84,11 @@ cdef extern from "world/codec.h":
         int f0_length, int fs, int fft_size, int number_of_dimensions,
         double **spectrogram) except +
 
+
 default_frame_period = 5.0
 default_f0_floor = 71.0
 default_f0_ceil = 800.0
+
 
 def dio(np.ndarray[double, ndim=1, mode="c"] x not None, int fs,
         f0_floor=default_f0_floor, f0_ceil=default_f0_ceil,
@@ -422,7 +424,7 @@ def synthesize(np.ndarray[double, ndim=1, mode="c"] f0 not None,
         f0.shape[0] != aperiodicity.shape[0]):
         raise ValueError('Mismatched number of frames between F0 ({:d}), '
                          'spectrogram ({:d}) and aperiodicty ({:d})'
-                         .format(f0.shape[0], spectrogram.shape[0], 
+                         .format(f0.shape[0], spectrogram.shape[0],
                                  aperiodicity.shape[0]))
     if spectrogram.shape[1] != aperiodicity.shape[1]:
         raise ValueError('Mismatched dimensionality (spec size) between '
@@ -498,7 +500,7 @@ def code_aperiodicity(np.ndarray[double, ndim=2, mode="c"] aperiodicity, fs):
         cpp_aper[i] = &aper[i, 0]
         cpp_coded_aper[i] = &coded_aper[i, 0]
 
-    CodeAperiodicity(cpp_aper, ap_length, fs, 
+    CodeAperiodicity(cpp_aper, ap_length, fs,
         fft_size, cpp_coded_aper)
 
     return np.array(coded_aper, dtype=np.float64)
@@ -619,7 +621,7 @@ def decode_spectral_envelope(np.ndarray[double, ndim=2, mode="c"] coded_spectral
 
     return np.array(sp, dtype=np.float64)
 
-def wav2world(x, fs, frame_period=default_frame_period):
+def wav2world(x, fs, fft_size=None, frame_period=default_frame_period):
     """Convenience function to do all WORLD analysis steps in a single call.
 
     In this case only `frame_period` can be configured and other parameters
@@ -645,8 +647,13 @@ def wav2world(x, fs, frame_period=default_frame_period):
     ap : ndarray
         Aperiodicity.
     """
+    if fft_size is None:
+        fft_size = get_cheaptrick_fft_size(fs, default_f0_floor)
+    else:
+        fft_size = fft_size
+
     _f0, t = dio(x, fs, frame_period=frame_period)
     f0 = stonemask(x, _f0, t, fs)
-    sp = cheaptrick(x, f0, t, fs)
-    ap = d4c(x, f0, t, fs)
+    sp = cheaptrick(x, f0, t, fs, fft_size=fft_size)
+    ap = d4c(x, f0, t, fs, fft_size=fft_size)
     return f0, sp, ap
