@@ -637,6 +637,9 @@ def wav2world(x, fs, fft_size=None, frame_period=default_frame_period):
     frame_period : float
         Period between consecutive frames in milliseconds.
         Default: 5.0
+    fft_size : int
+        Length of Fast Fourier Transform (in number of samples)
+        The resulting dimension of `ap` adn `sp` will be `fft_size` // 2 + 1
 
     Returns
     -------
@@ -647,11 +650,6 @@ def wav2world(x, fs, fft_size=None, frame_period=default_frame_period):
     ap : ndarray
         Aperiodicity.
     """
-    if fft_size is None:
-        fft_size = get_cheaptrick_fft_size(fs, default_f0_floor)
-    else:
-        fft_size = fft_size
-
     _f0, t = dio(x, fs, frame_period=frame_period)
     f0 = stonemask(x, _f0, t, fs)
     sp = cheaptrick(x, f0, t, fs, fft_size=fft_size)
