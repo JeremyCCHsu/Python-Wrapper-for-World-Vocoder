@@ -46,7 +46,7 @@ setup(
     long_description='\n'.join(DOCLINES[2:]),
     ext_modules=ext_modules,
     cmdclass={'build_ext': build_ext},
-    version='0.2.5a',
+    version='0.2.7',
     packages=find_packages(),
     setup_requires=[
         'numpy',
