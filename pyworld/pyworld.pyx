@@ -648,9 +648,9 @@ def wav2world(x, fs, fft_size=None, frame_period=default_frame_period):
         Aperiodicity.
     """
     if fft_size is None:
-        fft_size0 = get_cheaptrick_fft_size(fs, default_f0_floor)
+        fft_size = get_cheaptrick_fft_size(fs, default_f0_floor)
     else:
-        fft_size0 = fft_size
+        fft_size = fft_size
 
     _f0, t = dio(x, fs, frame_period=frame_period)
     f0 = stonemask(x, _f0, t, fs)
