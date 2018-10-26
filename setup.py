@@ -7,6 +7,7 @@ spectral envelope and also generate the speech like input speech with only
 estimated parameters.
 """
 
+
 from __future__ import with_statement, print_function, absolute_import
 
 from setuptools import setup, find_packages, Extension
@@ -17,6 +18,10 @@ from glob import glob
 from os.path import join
 
 from setuptools.command.build_ext import build_ext as _build_ext
+
+
+DOCLINES = __doc__.split('\n')
+_VERSION = '0.2.8'
 
 class build_ext(_build_ext):
     def finalize_options(self):
@@ -38,6 +43,7 @@ ext_modules = [
 
 setup(
     name="pyworld",
+    description=DOCLINES,
     ext_modules=ext_modules,
     cmdclass={'build_ext': build_ext},
     version='0.2.5a',
