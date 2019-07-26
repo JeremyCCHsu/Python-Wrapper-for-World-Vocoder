@@ -20,7 +20,7 @@ from setuptools.command.build_ext import build_ext as _build_ext
 
 
 DOCLINES = __doc__.split('\n')
-_VERSION = '0.2.8'
+_VERSION = '0.2.9'
 
 class build_ext(_build_ext):
     def finalize_options(self):
