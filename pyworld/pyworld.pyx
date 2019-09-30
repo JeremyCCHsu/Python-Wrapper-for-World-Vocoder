@@ -141,6 +141,7 @@ def dio(np.ndarray[double, ndim=1, mode="c"] x not None, int fs,
     option.f0_ceil = f0_ceil
     option.frame_period = frame_period
     option.speed = speed
+    option.allowed_range = allowed_range
     f0_length = GetSamplesForDIO(fs, x_length, option.frame_period)
     cdef np.ndarray[double, ndim=1, mode="c"] f0 = \
         np.zeros(f0_length, dtype=np.dtype('float64'))
