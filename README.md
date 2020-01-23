@@ -68,6 +68,7 @@ to see if you get results in `test/` direcotry.
 
 ### Other Installation Suggestions
 1. Use `pip install .` is safer and you can easily uninstall pyworld by `pip uninstall pyworld`
+  - For Mac users: You might need to do `MACOSX_DEPLOYMENT_TARGET=10.9 pip install .` See [issue](https://github.com/SeanNaren/warp-ctc/issues/129#issuecomment-502349652).
 2. Another way to install pyworld is via<br/>
    `python setup.py install`<br/>
    - Add `--user` if you don't have root access<br/>
