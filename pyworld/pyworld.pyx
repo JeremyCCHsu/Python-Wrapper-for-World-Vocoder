@@ -635,12 +635,12 @@ def wav2world(x, fs, fft_size=None, frame_period=default_frame_period):
         Input waveform signal.
     fs : int
         Sample rate of input signal in Hz.
-    frame_period : float
-        Period between consecutive frames in milliseconds.
-        Default: 5.0
     fft_size : int
         Length of Fast Fourier Transform (in number of samples)
         The resulting dimension of `ap` adn `sp` will be `fft_size` // 2 + 1
+    frame_period : float
+        Period between consecutive frames in milliseconds.
+        Default: 5.0
 
     Returns
     -------
