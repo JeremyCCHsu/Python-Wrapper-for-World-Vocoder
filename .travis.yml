@@ -42,4 +42,4 @@ deploy:
       tags: true
   skip_cleanup: true
   skip_existing: true
-  
+  distributions: "sdist bdist_wheel"
