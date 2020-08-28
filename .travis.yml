@@ -33,6 +33,10 @@ script:
   - python demo.py
   - cd ..
 
+
+before_deploy:
+  - python setup.py bdist_wheel
+
 deploy:
   provider: pypi
   user: JeremyCCHsu
