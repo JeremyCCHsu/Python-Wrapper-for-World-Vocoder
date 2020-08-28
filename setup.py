@@ -20,7 +20,7 @@ from setuptools.command.build_ext import build_ext as _build_ext
 
 
 DOCLINES = __doc__.split('\n')
-_VERSION = '0.2.11'
+_VERSION = '0.2.13'
 
 class build_ext(_build_ext):
     def finalize_options(self):
@@ -42,7 +42,7 @@ ext_modules = [
 
 setup(
     name="pyworld",
-    description=DOCLINES,
+    description=DOCLINES[0],
     long_description='\n'.join(DOCLINES[2:]),
     ext_modules=ext_modules,
     cmdclass={'build_ext': build_ext},
