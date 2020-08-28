@@ -59,18 +59,6 @@ test_script:
 
 after_test:
   - python setup.py bdist_wheel
-  # - ps: |
-  #     $ErrorActionPreference = "Stop"
-  #     if ($APPVEYOR_REPO_TAG) {
-  #       conda install -y twine
-  #       python setup.py bdist_wheel
-  #       twine upload dist\*
-  #     }
-  #     else{
-  #       "Not a tag (skipped)"
-  #       "$APPVEYOR_REPO_TAG"
-  #       "$APPVEYOR_REPO_TAG_NAME"
-  #     }
 
 artifacts:
   - path: dist\*
