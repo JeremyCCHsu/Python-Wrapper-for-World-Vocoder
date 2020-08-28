@@ -34,8 +34,8 @@ script:
   - cd ..
 
 
-before_deploy:
-  - python setup.py bdist_wheel
+# before_deploy:
+#   - python setup.py bdist_wheel
 
 deploy:
   provider: pypi
@@ -46,4 +46,4 @@ deploy:
       tags: true
   skip_cleanup: true
   skip_existing: true
-  distributions: "sdist bdist_wheel"
+  # distributions: "sdist bdist_wheel"
