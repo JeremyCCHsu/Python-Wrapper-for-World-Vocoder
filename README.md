@@ -76,6 +76,7 @@ to see if you get results in `test/` direcotry.
 - Operating systems 
   - Linux Ubuntu 14.04+
   - Windows (thanks to [wuaalb](https://github.com/wuaalb))
+  - WSL
 - Python
   - 2.7 (Windows is currently not supported)
   - 3.7/3.6/3.5
@@ -119,7 +120,7 @@ You can install dependencies these by `pip install -r requirements.txt`
 
 4. If you have installation issue on Windows, I probably could not provide 
    much help because my development environment is Ubuntu 
-   and Windows Linux Subsystem ([read this if you are interested in installing it](https://github.com/JeremyCCHsu/wsl)).
+   and Windows Subsystem for Linux ([read this if you are interested in installing it](https://github.com/JeremyCCHsu/wsl)).
 
 
 ### Other Installation Suggestions
