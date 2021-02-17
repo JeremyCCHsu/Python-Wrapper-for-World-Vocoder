@@ -48,6 +48,9 @@ setup(
     cmdclass={'build_ext': build_ext},
     version=_VERSION,
     packages=find_packages(),
+    package_data={
+        "pyworld": ["py.typed", "*.pyi"],
+    },
     setup_requires=[
         'numpy',
     ],
