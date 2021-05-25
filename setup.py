@@ -21,7 +21,7 @@ from setuptools.command.build_ext import build_ext
 
 
 DOCLINES = __doc__.split('\n')
-_VERSION = '0.2.12'
+_VERSION = '0.3.0'
 
 world_src_top = join("lib", "World", "src")
 world_sources = glob(join(world_src_top, "*.cpp"))
