@@ -69,7 +69,7 @@ You can validate installation by running
 cd demo
 python demo.py
 ```
-to see if you get results in `test/` direcotry.
+to see if you get results in `test/` directory.
 (Please avoid writing and executing codes in the `Python-Wrapper-for-World-Vocoder` folder for now.)<br/>
 
 ### Environment/Dependencies  
