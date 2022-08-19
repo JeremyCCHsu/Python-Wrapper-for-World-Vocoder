@@ -21,7 +21,7 @@ from setuptools.command.build_ext import build_ext
 
 
 DOCLINES = __doc__.split('\n')
-_VERSION = '0.3.0'
+_VERSION = '0.3.1'
 
 world_src_top = join("lib", "World", "src")
 world_sources = glob(join(world_src_top, "*.cpp"))
@@ -46,7 +46,7 @@ setup(
     ],
     install_requires=[
         'numpy',
-        'cython>=0.24.0',
+        'cython',
     ],
     extras_require={
         'test': ['nose'],
