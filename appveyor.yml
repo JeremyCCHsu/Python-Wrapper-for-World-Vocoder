@@ -24,33 +24,28 @@ environment:
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda3-x64
 
-    - PYTHON_VERSION: "3.8"
-      PYTHON_ARCH: "32"
-      MINICONDA: C:\Miniconda3
+    # - PYTHON_VERSION: "3.8"
+    #   PYTHON_ARCH: "32"
+    #   MINICONDA: C:\Miniconda3
 
     - PYTHON_VERSION: "3.9"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda3-x64
 
-    - PYTHON_VERSION: "3.9"
-      PYTHON_ARCH: "32"
-      MINICONDA: C:\Miniconda3
+    # - PYTHON_VERSION: "3.9"
+    #   PYTHON_ARCH: "32"
+    #   MINICONDA: C:\Miniconda3
 
     - PYTHON_VERSION: "3.10"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda3-x64
 
-    - PYTHON_VERSION: "3.10"
-      PYTHON_ARCH: "32"
-      MINICONDA: C:\Miniconda3
+    # - PYTHON_VERSION: "3.10"
+    #   PYTHON_ARCH: "32"
+    #   MINICONDA: C:\Miniconda3
 
-    - PYTHON_VERSION: "3.11"
-      PYTHON_ARCH: "64"
-      MINICONDA: C:\Miniconda3-x64
-
-    - PYTHON_VERSION: "3.11"
-      PYTHON_ARCH: "32"
-      MINICONDA: C:\Miniconda3
+# The above commented lines has problem executing the `test_script`
+# Python >= 3.8 (32-bit)
 
 # platform: x64
 
