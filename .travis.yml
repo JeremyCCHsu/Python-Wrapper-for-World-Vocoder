@@ -7,8 +7,7 @@ python:
   - "3.6"
   - "3.7"
   - "3.8"
-- "3.9"
-- "3.10"
+  - "3.9"
 
 env:
   global:
@@ -18,7 +17,7 @@ env:
 
 matrix:
   include:
-    - python: 3.7
+    - python: 3.9
       dist: xenial
       sudo: true
 
