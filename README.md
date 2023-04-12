@@ -40,14 +40,14 @@ f0, sp, ap = pw.wav2world(x, fs)
 ```
 <br/>
 
-You can change the default arguments of the function, too. 
+You can change the default arguments of the function, too.
 See more info using `help`.
 
 
 ## Installation
 
 ### Using Pip
-`pip install pyworld`  
+`pip install pyworld`
 <br/>
 
 ### Building from Source
@@ -72,14 +72,13 @@ python demo.py
 to see if you get results in `test/` direcotry.
 (Please avoid writing and executing codes in the `Python-Wrapper-for-World-Vocoder` folder for now.)<br/>
 
-### Environment/Dependencies  
-- Operating systems 
+### Environment/Dependencies
+- Operating systems
   - Linux Ubuntu 14.04+
   - Windows (thanks to [wuaalb](https://github.com/wuaalb))
   - WSL
 - Python
-  - 2.7 (Windows is currently not supported)
-  - 3.7/3.6/3.5
+  - 3.7+
 
 You can install dependencies these by `pip install -r requirements.txt`
 
@@ -89,26 +88,20 @@ You can install dependencies these by `pip install -r requirements.txt`
 - WORLD vocoder is designed for speech sampled ≥ 16 kHz.
   Applying WORLD to 8 kHz speech will fail.
   See a possible workaround [here](https://github.com/JeremyCCHsu/Python-Wrapper-for-World-Vocoder/issues/54).
-- When the SNR is low, extracting pitch using `harvest` instead of `dio` 
+- When the SNR is low, extracting pitch using `harvest` instead of `dio`
   is a better option.
 
 
 ## Troubleshooting
-1. Upgrade your Cython version to 0.24.<br/>
-   (I failed to build it on Cython 0.20.1post0)<br/>
-   It'll require you to download Cython form http://cython.org/<br/>
-   Unzip it, and `python setup.py install` it.<br/>
-   (I tried `pip install Cython` but the upgrade didn't seem correct)<br/>
-   (Again, add `--user` if you don't have root access.)
 2. Upon executing `demo/demo.py`, the following code might be needed in some environments (e.g. when you're working on a remote Linux server):<br/>
 
  ```python
  import matplotlib
  matplotlib.use('Agg')
  ```
-3. If you encounter `library not found: sndfile` error upon executing `demo.py`,  
-   you might have to install it by `apt-get install libsoundfile1`.  
-   You can also replace `pysoundfile` with `scipy` or `librosa`, but some modification is needed:   
+3. If you encounter `library not found: sndfile` error upon executing `demo.py`,
+   you might have to install it by `apt-get install libsoundfile1`.
+   You can also replace `pysoundfile` with `scipy` or `librosa`, but some modification is needed:
    - librosa:
      - load(fiilename, dtype=np.float64)
      - output.write_wav(filename, wav, fs)
@@ -118,8 +111,8 @@ You can install dependencies these by `pip install -r requirements.txt`
      - scipy.io.wavfile.read (but this gives you `short`)
      - scipy.io.wavfile.write
 
-4. If you have installation issue on Windows, I probably could not provide 
-   much help because my development environment is Ubuntu 
+4. If you have installation issue on Windows, I probably could not provide
+   much help because my development environment is Ubuntu
    and Windows Subsystem for Linux ([read this if you are interested in installing it](https://github.com/JeremyCCHsu/wsl)).
 
 
