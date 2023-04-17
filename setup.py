@@ -4,25 +4,24 @@ from setuptools import setup, find_packages, Extension
 from distutils.version import LooseVersion
 
 from pathlib import Path
-# import os
-# from glob import glob
-# from os.path import join
 import numpy
 
 from setuptools.command.build_ext import build_ext
 
 
-_VERSION = '0.3.2'
+_VERSION = '0.3.3'
 
-world_src_top = Path("lib") / "World" / "src" #join("lib", "World", "src")
-world_sources = world_src_top.glob("*.cpp")   # glob(join(world_src_top, "*.cpp"))
+world_src_top = Path("lib") / "World" / "src"
+world_sources = [str(f) for f in world_src_top.glob("*.cpp")]
+
+pyx = str(Path("pyworld") / "pyworld.pyx")
+world_sources
 
 ext_modules = [
     Extension(
         name="pyworld.pyworld",
         include_dirs=[world_src_top, numpy.get_include()],
-        # sources=[join("pyworld", "pyworld.pyx")] + world_sources,
-        sources=[Path("pyworld") /  "pyworld.pyx"] + world_sources,
+        sources=[pyx] + world_sources,
         language="c++")]
 
 setup(
@@ -39,7 +38,7 @@ setup(
     ],
     install_requires=[
         'numpy',
-        'cython>0.24',
+        'cython>=0.24',
     ],
     extras_require={
         'test': ['nose'],

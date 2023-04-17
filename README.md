@@ -95,6 +95,12 @@ You can install dependencies these by `pip install -r requirements.txt`
 
 
 ## Troubleshooting
+1. Upgrade your Cython version to 0.24.<br/>
+   (I failed to build it on Cython 0.20.1post0)<br/>
+   It'll require you to download Cython form http://cython.org/<br/>
+   Unzip it, and `python setup.py install` it.<br/>
+   (I tried `pip install Cython` but the upgrade didn't seem correct)<br/>
+   (Again, add `--user` if you don't have root access.)
 2. Upon executing `demo/demo.py`, the following code might be needed in some environments (e.g. when you're working on a remote Linux server):<br/>
 
  ```python
