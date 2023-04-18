@@ -35,15 +35,15 @@ setup(
     version=_VERSION,
     packages=find_packages(),
     setup_requires=[
-        'numpy>=1.14.3',
+        'numpy',
     ],
     install_requires=[
-        'numpy>=1.14.3',
-        'cython>=0.28',
+        'numpy',
+        'cython>=0.24',
     ],
     extras_require={
         'test': ['nose'],
-        'sdist': ['numpy>=1.14.3', 'cython>=0.28'],
+        'sdist': ['numpy', 'cython>=0.24'],
     },
     author="Pyworld Contributors",
     author_email="jeremycchsu@gmail.com",
