@@ -3,6 +3,7 @@ from __future__ import with_statement, print_function, absolute_import
 from setuptools import setup, find_packages, Extension
 from distutils.version import LooseVersion
 
+import sys
 from glob import glob
 from os.path import join
 import numpy
@@ -23,10 +24,11 @@ ext_modules = [
         sources=[join("pyworld", "pyworld.pyx")] + world_sources,
         language="c++")]
 
+kwargs = {"encoding": "utf-8"} if int(sys.version[0]) > 2 else {}
 setup(
     name="pyworld",
     description="PyWorld: a Python wrapper for WORLD vocoder",
-    long_description=open("README.md", "r", encoding="utf-8").read(),
+    long_description=open("README.md", "r", **kwargs).read(),
     long_description_content_type="text/markdown",
     ext_modules=ext_modules,
     cmdclass={'build_ext': build_ext},
