@@ -3,7 +3,8 @@ from __future__ import with_statement, print_function, absolute_import
 from setuptools import setup, find_packages, Extension
 from distutils.version import LooseVersion
 
-from pathlib import Path
+from glob import glob
+from os.path import join
 import numpy
 
 from setuptools.command.build_ext import build_ext
@@ -11,17 +12,15 @@ from setuptools.command.build_ext import build_ext
 
 _VERSION = '0.3.3'
 
-world_src_top = Path("lib") / "World" / "src"
-world_sources = [str(f) for f in world_src_top.glob("*.cpp")]
 
-pyx = str(Path("pyworld") / "pyworld.pyx")
-world_sources
+world_src_top = join("lib", "World", "src")
+world_sources = glob(join(world_src_top, "*.cpp"))
 
 ext_modules = [
     Extension(
         name="pyworld.pyworld",
         include_dirs=[world_src_top, numpy.get_include()],
-        sources=[pyx] + world_sources,
+        sources=[join("pyworld", "pyworld.pyx")] + world_sources,
         language="c++")]
 
 setup(
