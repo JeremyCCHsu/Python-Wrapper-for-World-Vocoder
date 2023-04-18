@@ -3,7 +3,9 @@
 
 | **`Linux`** | **`Windows`** |
 |-----------------|-----------|
-| [![Build Status](https://travis-ci.org/JeremyCCHsu/Python-Wrapper-for-World-Vocoder.svg?branch=master)](https://travis-ci.org/JeremyCCHsu/Python-Wrapper-for-World-Vocoder) | [![Build Status](https://ci.appveyor.com/api/projects/status/github/JeremyCCHsu/Python-Wrapper-for-World-Vocoder?svg=true)](https://ci.appveyor.com/project/JeremyCCHsu/python-wrapper-for-world-vocoder) |
+| [![Build Status](https://app.travis-ci.com/JeremyCCHsu/Python-Wrapper-for-World-Vocoder.svg?branch=master)](https://app.travis-ci.com/JeremyCCHsu/Python-Wrapper-for-World-Vocoder) | [![Build Status](https://ci.appveyor.com/api/projects/status/github/JeremyCCHsu/Python-Wrapper-for-World-Vocoder?svg=true)](https://ci.appveyor.com/project/JeremyCCHsu/python-wrapper-for-world-vocoder) |
+
+
 
 
 WORLD Vocoder is a fast and high-quality vocoder
@@ -40,14 +42,14 @@ f0, sp, ap = pw.wav2world(x, fs)
 ```
 <br/>
 
-You can change the default arguments of the function, too. 
+You can change the default arguments of the function, too.
 See more info using `help`.
 
 
 ## Installation
 
 ### Using Pip
-`pip install pyworld`  
+`pip install pyworld`
 <br/>
 
 ### Building from Source
@@ -72,14 +74,13 @@ python demo.py
 to see if you get results in `test/` direcotry.
 (Please avoid writing and executing codes in the `Python-Wrapper-for-World-Vocoder` folder for now.)<br/>
 
-### Environment/Dependencies  
-- Operating systems 
+### Environment/Dependencies
+- Operating systems
   - Linux Ubuntu 14.04+
   - Windows (thanks to [wuaalb](https://github.com/wuaalb))
   - WSL
 - Python
-  - 2.7 (Windows is currently not supported)
-  - 3.7/3.6/3.5
+  - 3.7+
 
 You can install dependencies these by `pip install -r requirements.txt`
 
@@ -89,7 +90,7 @@ You can install dependencies these by `pip install -r requirements.txt`
 - WORLD vocoder is designed for speech sampled ≥ 16 kHz.
   Applying WORLD to 8 kHz speech will fail.
   See a possible workaround [here](https://github.com/JeremyCCHsu/Python-Wrapper-for-World-Vocoder/issues/54).
-- When the SNR is low, extracting pitch using `harvest` instead of `dio` 
+- When the SNR is low, extracting pitch using `harvest` instead of `dio`
   is a better option.
 
 
@@ -106,9 +107,9 @@ You can install dependencies these by `pip install -r requirements.txt`
  import matplotlib
  matplotlib.use('Agg')
  ```
-3. If you encounter `library not found: sndfile` error upon executing `demo.py`,  
-   you might have to install it by `apt-get install libsoundfile1`.  
-   You can also replace `pysoundfile` with `scipy` or `librosa`, but some modification is needed:   
+3. If you encounter `library not found: sndfile` error upon executing `demo.py`,
+   you might have to install it by `apt-get install libsoundfile1`.
+   You can also replace `pysoundfile` with `scipy` or `librosa`, but some modification is needed:
    - librosa:
      - load(fiilename, dtype=np.float64)
      - output.write_wav(filename, wav, fs)
@@ -118,8 +119,8 @@ You can install dependencies these by `pip install -r requirements.txt`
      - scipy.io.wavfile.read (but this gives you `short`)
      - scipy.io.wavfile.write
 
-4. If you have installation issue on Windows, I probably could not provide 
-   much help because my development environment is Ubuntu 
+4. If you have installation issue on Windows, I probably could not provide
+   much help because my development environment is Ubuntu
    and Windows Subsystem for Linux ([read this if you are interested in installing it](https://github.com/JeremyCCHsu/wsl)).
 
 

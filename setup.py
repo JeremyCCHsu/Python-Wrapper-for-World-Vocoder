@@ -1,18 +1,9 @@
-"""PyWorld is a Python wrapper for WORLD vocoder.
-
-PyWorld wrappers WORLD, which is a free software for high-quality speech
-analysis, manipulation and synthesis. It can estimate fundamental frequency (F0),
-aperiodicity and spectral envelope and also generate the speech like input speech
-with only estimated parameters.
-"""
-
-
 from __future__ import with_statement, print_function, absolute_import
 
 from setuptools import setup, find_packages, Extension
 from distutils.version import LooseVersion
 
-import os
+import sys
 from glob import glob
 from os.path import join
 import numpy
@@ -20,8 +11,8 @@ import numpy
 from setuptools.command.build_ext import build_ext
 
 
-DOCLINES = __doc__.split('\n')
-_VERSION = '0.3.2'
+_VERSION = '0.3.3'
+
 
 world_src_top = join("lib", "World", "src")
 world_sources = glob(join(world_src_top, "*.cpp"))
@@ -33,10 +24,12 @@ ext_modules = [
         sources=[join("pyworld", "pyworld.pyx")] + world_sources,
         language="c++")]
 
+kwargs = {"encoding": "utf-8"} if int(sys.version[0]) > 2 else {}
 setup(
     name="pyworld",
-    description=DOCLINES[0],
-    long_description='\n'.join(DOCLINES[2:]),
+    description="PyWorld: a Python wrapper for WORLD vocoder",
+    long_description=open("README.md", "r", **kwargs).read(),
+    long_description_content_type="text/markdown",
     ext_modules=ext_modules,
     cmdclass={'build_ext': build_ext},
     version=_VERSION,
@@ -46,11 +39,11 @@ setup(
     ],
     install_requires=[
         'numpy',
-        'cython',
+        'cython>=0.24',
     ],
     extras_require={
         'test': ['nose'],
-        'sdist': ['numpy', 'cython'],
+        'sdist': ['numpy', 'cython>=0.24'],
     },
     author="Pyworld Contributors",
     author_email="jeremycchsu@gmail.com",
