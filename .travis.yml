@@ -1,6 +1,8 @@
 language:
   - python
 
+dist: jammy
+
 python:
   - "2.7"
   - "3.5"
@@ -8,7 +10,6 @@ python:
   - "3.7"
   - "3.8"
   - "3.9"
-  - "3.10"
 
 env:
   global:
