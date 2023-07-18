@@ -1,5 +1,5 @@
 numpy
 matplotlib
 argparse
-cython==0.29.36
+cython<=0.29.36
 pysoundfile
