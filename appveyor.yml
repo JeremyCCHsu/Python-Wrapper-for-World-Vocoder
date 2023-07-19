@@ -95,6 +95,7 @@ deploy_script:
       $ErrorActionPreference = "Stop"
       if ($Env:APPVEYOR_REPO_TAG -eq "true"){
         pip install twine
+        pip install -U urllib3==1.26.6
         twine upload dist/*.whl
       }
       else{

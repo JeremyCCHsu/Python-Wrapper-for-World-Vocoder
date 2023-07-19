@@ -11,7 +11,7 @@ import numpy
 from setuptools.command.build_ext import build_ext
 
 
-_VERSION = '0.3.3'
+_VERSION = '0.3.4'
 
 
 world_src_top = join("lib", "World", "src")
