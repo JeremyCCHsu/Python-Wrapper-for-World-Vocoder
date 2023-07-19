@@ -38,7 +38,7 @@ script:
 
 
 before_deploy:
-  - pip install urllib3==1.26.6
+  - pip install -U urllib3==1.26.6
 #   - python setup.py bdist_wheel
 
 deploy:
