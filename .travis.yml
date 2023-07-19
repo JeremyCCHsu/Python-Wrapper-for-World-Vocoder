@@ -25,6 +25,7 @@ matrix:
 
 before_install:
   - sudo apt-get install -y libsndfile1
+  - sudo apt-get install -y libssl1.1
 
 install:
   - pip install -U pip
@@ -37,8 +38,8 @@ script:
   - cd ..
 
 
-before_deploy:
-  - pip install -U urllib3==1.26.6
+# before_deploy:
+#   - pip install -U urllib3==1.26.6
 #   - python setup.py bdist_wheel
 
 deploy:
