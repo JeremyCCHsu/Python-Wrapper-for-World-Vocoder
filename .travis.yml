@@ -8,6 +8,7 @@ python:
   - "3.7"
   - "3.8"
   - "3.9"
+  - "3.10"
 
 env:
   global:
@@ -36,7 +37,8 @@ script:
   - cd ..
 
 
-# before_deploy:
+before_deploy:
+  - pip install urllib3==1.26.6
 #   - python setup.py bdist_wheel
 
 deploy:

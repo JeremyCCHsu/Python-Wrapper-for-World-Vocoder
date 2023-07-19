@@ -95,7 +95,8 @@ deploy_script:
       $ErrorActionPreference = "Stop"
       if ($Env:APPVEYOR_REPO_TAG -eq "true"){
         pip install twine
-        twine upload dist/*.whl
+        pip install requests==2.27.0
+        export CURL_CA_BUNDLE="" && twine upload dist/*.whl
       }
       else{
         "Not a tag (skipped)"
