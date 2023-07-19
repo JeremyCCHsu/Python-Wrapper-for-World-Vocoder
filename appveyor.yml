@@ -4,17 +4,17 @@ environment:
     secure: HXcw31EzuR8YDqCfkd3APw==
 
   matrix:
-    # - PYTHON_VERSION: "3.6"
-    #   PYTHON_ARCH: "64"
-    #   MINICONDA: C:\Miniconda3-x64
+    - PYTHON_VERSION: "3.6"
+      PYTHON_ARCH: "64"
+      MINICONDA: C:\Miniconda3-x64
 
     - PYTHON_VERSION: "3.6"
       PYTHON_ARCH: "32"
       MINICONDA: C:\Miniconda3
 
-    # - PYTHON_VERSION: "3.7"
-    #   PYTHON_ARCH: "64"
-    #   MINICONDA: C:\Miniconda3-x64
+    - PYTHON_VERSION: "3.7"
+      PYTHON_ARCH: "64"
+      MINICONDA: C:\Miniconda3-x64
 
     - PYTHON_VERSION: "3.7"
       PYTHON_ARCH: "32"
@@ -95,8 +95,8 @@ deploy_script:
       $ErrorActionPreference = "Stop"
       if ($Env:APPVEYOR_REPO_TAG -eq "true"){
         pip install twine
-        pip install requests==2.27.0
-        export CURL_CA_BUNDLE="" && twine upload dist/*.whl
+        pip install -U urllib3==1.26.6
+        twine upload dist/*.whl
       }
       else{
         "Not a tag (skipped)"
