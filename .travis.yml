@@ -25,7 +25,6 @@ matrix:
 
 before_install:
   - sudo apt-get install -y libsndfile1
-  - sudo apt-get install -y libssl1.1
 
 install:
   - pip install -U pip
@@ -39,10 +38,13 @@ script:
 
 
 # before_deploy:
-#   - pip install -U urllib3==1.26.6
+#
 #   - python setup.py bdist_wheel
 
 deploy:
+  - pip install -U requests==2.28.1
+  - pip install -U urllib3==1.26.15
+  # https://kb.vmware.com/s/article/92237
   provider: pypi
   user: JeremyCCHsu
   password:
