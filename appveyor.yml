@@ -4,37 +4,37 @@ environment:
     secure: HXcw31EzuR8YDqCfkd3APw==
 
   matrix:
-    - PYTHON_VERSION: "3.6"
-      PYTHON_ARCH: "64"
-      MINICONDA: C:\Miniconda3-x64
+    # - PYTHON_VERSION: "3.6"
+    #   PYTHON_ARCH: "64"
+    #   MINICONDA: C:\Miniconda3-x64
 
-    - PYTHON_VERSION: "3.6"
-      PYTHON_ARCH: "32"
-      MINICONDA: C:\Miniconda3
+    # - PYTHON_VERSION: "3.6"
+    #   PYTHON_ARCH: "32"
+    #   MINICONDA: C:\Miniconda3
 
-    - PYTHON_VERSION: "3.7"
-      PYTHON_ARCH: "64"
-      MINICONDA: C:\Miniconda3-x64
+    # - PYTHON_VERSION: "3.7"
+    #   PYTHON_ARCH: "64"
+    #   MINICONDA: C:\Miniconda3-x64
 
-    - PYTHON_VERSION: "3.7"
-      PYTHON_ARCH: "32"
-      MINICONDA: C:\Miniconda3
-
-    - PYTHON_VERSION: "3.8"
-      PYTHON_ARCH: "64"
-      MINICONDA: C:\Miniconda3-x64
+    # - PYTHON_VERSION: "3.7"
+    #   PYTHON_ARCH: "32"
+    #   MINICONDA: C:\Miniconda3
 
     # - PYTHON_VERSION: "3.8"
-    #   PYTHON_ARCH: "32"
-    #   MINICONDA: C:\Miniconda3
+    #   PYTHON_ARCH: "64"
+    #   MINICONDA: C:\Miniconda3-x64
 
-    - PYTHON_VERSION: "3.9"
-      PYTHON_ARCH: "64"
-      MINICONDA: C:\Miniconda3-x64
+    # # - PYTHON_VERSION: "3.8"
+    # #   PYTHON_ARCH: "32"
+    # #   MINICONDA: C:\Miniconda3
 
     # - PYTHON_VERSION: "3.9"
-    #   PYTHON_ARCH: "32"
-    #   MINICONDA: C:\Miniconda3
+    #   PYTHON_ARCH: "64"
+    #   MINICONDA: C:\Miniconda3-x64
+
+    # # - PYTHON_VERSION: "3.9"
+    # #   PYTHON_ARCH: "32"
+    # #   MINICONDA: C:\Miniconda3
 
     - PYTHON_VERSION: "3.10"
       PYTHON_ARCH: "64"
