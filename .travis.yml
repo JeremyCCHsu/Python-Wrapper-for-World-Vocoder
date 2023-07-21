@@ -22,9 +22,13 @@ matrix:
     - python: 3.10
       dist: jammy
       sudo: true
+    - python: 3.11
+      dist: jammy
+      sudo: true
 
 before_install:
   - sudo apt-get install -y libsndfile1
+  - sudo apt-get install -y libssl3
 
 install:
   - pip install -U pip
@@ -37,15 +41,14 @@ script:
   - cd ..
 
 
-before_deploy:
-  - pip install urllib3==1.26.6
+# before_deploy:
 #   - python setup.py bdist_wheel
 
 deploy:
   provider: pypi
-  user: JeremyCCHsu
+  user: __token__
   password:
-    secure: K22xeLmYvib1wUQyRJOQ+wjvFVK88HNCsGWVXdCFaIfR9F5QAKMmh+RsyKCS5JdMdZF+RtDDgcfsMOIlscGm/crgwzAN9OijKmj4WZGDPR4BY8O0TZGT2n1tfRJjGdmEwMfftmIfHRjX91iZjCW5k7EAwYvV0d+hAdUrSI1FGOKYPpMVusMYNih3AtPbobpTCwgaKddwCVw1YoCEEgSuXfpyZfQzEirEGViJfXr6EmojVoVYi1oYlw4OhAKg+OVfTxVEVsT37xbPp0sjcADYVWr1kXAWF86fGyon+eSHMc5AewoP8tMNSeqyZuQ23EHx2xuK8Ipjv3C0xy+RmMPBdsi5xhbclElNvBH3OjL623x5JYziU+rsckh/6687vFzLg5twlfRDfwFwKHA4UVdSP0Uei8ebltHJwufyKiKjVMllJpbc9NOKJjSF+n0/ddwaebYbWgeZo6wvOnvuZb1d3TyGUktNfdypINNkd6D/RFd6l3kN4IhvBJqP7bZsSsrFoIdDL6to005Hy1Jb8IuUFihFC5BbWcFqd3BefOvZWmhpkZJRkTEN6pCEf0oNFxtWL6NuxwkbVZVcBgKAHAAz/4rKh6r0IipqfWfxKU3N9Phz998LfNwK2ZkQ32gDYdJ5abTY7v50J6s99U4DzSOaD4c3NoYE/VxyW/G1yo2FclQ=
+    secure: WF5VmRL0iTK/QPwlMzURfzNdjdvYbPf9QeiEImyaoofS0nsLOARQM+lPuKnXQdv206DOstrokzsYKfLJtfXflTB6AvVSD4OUQbzzpc+rKtHcg6GN+X27zvaf/8NnxOeaEKEcTvP5hEaGxP3Q7h7q3Q51Cwbl/aa0MmHHvik9l2KEVGvDvviieQzQWGxi2YH9xMl8kwpB62Byy13Fk3Jg0jr4DAO7PzIUjlT59GZ1K3elAFqREcJ64+RZQTMHi3Kikiq1QOU1etAq36iGag1RfW5sd35LS4b0CkCaGVfhrv7RG/oQtHPR+3bAedGKkJAUj+xo0ra+9+L0D8OJ8/MwlHXapd24+WGGMdAcUuKvaahj1D+Bn09XNcw0wLu6fCllPbfTMNFWHbB5SbnFhICW2mXNhl1KJ+IQmGW3mW8VHW+1bF6+XCCMzRVezetG6XLVY9ptDxM3mE3EWpaU102g9NXaWkBb/5FuNj+QO1P86WonpQTQLGMnAx5veVMiUhDEeXi6aMelL8hZnimdYaa/5vOJqo6k1OjzPNEhlrazYaU18OI+/Gtg7iDTdu99yHDMiAeq4kRN5lBfiX0PZrttZoJW0P0u44OO7MrQJ54Lz64KevdxPynh9WGJVWLkNaql3d91jvs0xaQwu1X3gbnhE19aEtMICwEfS53TYxl/fWs=
   on:
       tags: true
   skip_cleanup: true
