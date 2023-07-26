@@ -1,7 +1,6 @@
 from __future__ import with_statement, print_function, absolute_import
 
 from setuptools import setup, find_packages, Extension
-from distutils.version import LooseVersion
 
 import sys
 from glob import glob
@@ -34,12 +33,8 @@ setup(
     cmdclass={'build_ext': build_ext},
     version=_VERSION,
     packages=find_packages(),
-    setup_requires=[
-        'numpy',
-    ],
     install_requires=[
         'numpy',
-        'cython>=0.24',
     ],
     extras_require={
         'test': ['nose'],
