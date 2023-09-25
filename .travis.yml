@@ -27,6 +27,7 @@ matrix:
       sudo: true
 
 before_install:
+  - sudo apt-get update
   - sudo apt-get install -y libsndfile1
   - sudo apt-get install -y libssl3
 
@@ -34,6 +35,7 @@ install:
   - pip install -U pip
   - pip install -r requirements.txt
   - pip install -e .
+  - pip uninstall cython
 
 script:
   - cd demo
