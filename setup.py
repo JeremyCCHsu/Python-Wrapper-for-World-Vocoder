@@ -11,7 +11,7 @@ import numpy
 from setuptools.command.build_ext import build_ext
 
 
-_VERSION = '0.3.4'
+_VERSION = '0.3.5'
 
 
 world_src_top = join("lib", "World", "src")
@@ -39,11 +39,11 @@ setup(
     ],
     install_requires=[
         'numpy',
-        'cython>=0.24',
+        'cython>=3.0.2',
     ],
     extras_require={
         'test': ['nose'],
-        'sdist': ['numpy', 'cython>=0.24'],
+        'sdist': ['numpy', 'cython>=3.0.2'],
     },
     author="Pyworld Contributors",
     author_email="jeremycchsu@gmail.com",
