@@ -40,6 +40,7 @@ setup(
     install_requires=[
         'numpy',
         'cython>=0.24',
+        'importlib-metadata; python_version<"3.8"',
     ],
     extras_require={
         'test': ['nose'],
