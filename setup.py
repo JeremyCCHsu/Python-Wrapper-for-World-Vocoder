@@ -34,7 +34,7 @@ setup(
     packages=find_packages(),
     install_requires=['numpy'],
     extras_require={
-        'test': ['nose'],
+        'test': ['nose', 'matplotlib', 'soundfile'],
         'sdist': ['numpy', 'cython>=0.24'],
     },
     author="Pyworld Contributors",
