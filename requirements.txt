@@ -1,4 +1,2 @@
 numpy
-matplotlib
 argparse; python_version<"3.5"
-soundfile
