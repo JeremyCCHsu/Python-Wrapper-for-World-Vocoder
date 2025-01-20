@@ -82,6 +82,7 @@ build_script:
   - pip install -e .
 
 test_script:
+  - pip install soundfile matplotlib
   - ps: |
       $ErrorActionPreference = "Stop"
       Set-Location "$env:APPVEYOR_BUILD_FOLDER\demo"
