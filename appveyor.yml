@@ -89,7 +89,7 @@ test_script:
       Set-Location "$env:APPVEYOR_BUILD_FOLDER"
 
 after_test:
-  - python setup.py bdist_wheel
+  - pip wheel --wheel-dir=.\dist --no-deps .
 
 artifacts:
   - path: dist\*

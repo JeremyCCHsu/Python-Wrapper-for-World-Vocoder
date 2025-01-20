@@ -1,13 +1,11 @@
-from __future__ import with_statement, print_function, absolute_import
-
-from setuptools import setup, find_packages, Extension
-from distutils.version import LooseVersion
+from __future__ import absolute_import, print_function, with_statement
 
 import sys
 from glob import glob
 from os.path import join
-import numpy
 
+import numpy
+from setuptools import Extension, find_packages, setup
 from setuptools.command.build_ext import build_ext
 
 
@@ -34,13 +32,7 @@ setup(
     cmdclass={'build_ext': build_ext},
     version=_VERSION,
     packages=find_packages(),
-    setup_requires=[
-        'numpy',
-    ],
-    install_requires=[
-        'numpy',
-        'cython>=0.24',
-    ],
+    install_requires=['numpy'],
     extras_require={
         'test': ['nose'],
         'sdist': ['numpy', 'cython>=0.24'],
