@@ -4,50 +4,55 @@ environment:
     secure: A+ks10m1F2uReMyFye6x7fEWxuKCAFTn3Qu+Lw8T/4g3ExgSz9N8LxIEvXC+RkQwjTarXJyCOM8er4OsfYbQzfIfdMxgsuEuSY3TiPj2AssIXuNp7Xps56cRT+AQqXMp4UJ913Ryq1yKvnJHq91c6Lptx7WtWvbixrUI6p+ocV8zb8rO37KHUXR864z9h87dpwiY7ovKhV5+RF6AR+rmdt7nsaPLAd3M65r7M9v/sebaMNjhau5sizD3cwxOlzh/xVWhXABcMd+VlIhtq3xa4g==
 
   matrix:
-    - PYTHON_VERSION: "3.6"
-      PYTHON_ARCH: "64"
-      MINICONDA: C:\Miniconda3-x64
+    # - PYTHON_VERSION: "3.6"
+    #   PYTHON_ARCH: "64"
+    #   MINICONDA: C:\Miniconda3-x64
 
-    - PYTHON_VERSION: "3.6"
-      PYTHON_ARCH: "32"
-      MINICONDA: C:\Miniconda3
+    # - PYTHON_VERSION: "3.6"
+    #   PYTHON_ARCH: "32"
+    #   MINICONDA: C:\Miniconda3
 
-    - PYTHON_VERSION: "3.7"
-      PYTHON_ARCH: "64"
-      MINICONDA: C:\Miniconda3-x64
+    # - PYTHON_VERSION: "3.7"
+    #   PYTHON_ARCH: "64"
+    #   MINICONDA: C:\Miniconda3-x64
 
-    - PYTHON_VERSION: "3.7"
-      PYTHON_ARCH: "32"
-      MINICONDA: C:\Miniconda3
-
-    - PYTHON_VERSION: "3.8"
-      PYTHON_ARCH: "64"
-      MINICONDA: C:\Miniconda3-x64
+    # - PYTHON_VERSION: "3.7"
+    #   PYTHON_ARCH: "32"
+    #   MINICONDA: C:\Miniconda3
 
     # - PYTHON_VERSION: "3.8"
-    #   PYTHON_ARCH: "32"
-    #   MINICONDA: C:\Miniconda3
+    #   PYTHON_ARCH: "64"
+    #   MINICONDA: C:\Miniconda3-x64
 
-    - PYTHON_VERSION: "3.9"
-      PYTHON_ARCH: "64"
-      MINICONDA: C:\Miniconda3-x64
+    # # - PYTHON_VERSION: "3.8"
+    # #   PYTHON_ARCH: "32"
+    # #   MINICONDA: C:\Miniconda3
 
     # - PYTHON_VERSION: "3.9"
-    #   PYTHON_ARCH: "32"
-    #   MINICONDA: C:\Miniconda3
+    #   PYTHON_ARCH: "64"
+    #   MINICONDA: C:\Miniconda3-x64
 
-    - PYTHON_VERSION: "3.10"
-      PYTHON_ARCH: "64"
-      MINICONDA: C:\Miniconda3-x64
+    # # - PYTHON_VERSION: "3.9"
+    # #   PYTHON_ARCH: "32"
+    # #   MINICONDA: C:\Miniconda3
 
     # - PYTHON_VERSION: "3.10"
-    #   PYTHON_ARCH: "32"
-    #   MINICONDA: C:\Miniconda3
+    #   PYTHON_ARCH: "64"
+    #   MINICONDA: C:\Miniconda3-x64
 
-    - PYTHON_VERSION: "3.11"
+    # # - PYTHON_VERSION: "3.10"
+    # #   PYTHON_ARCH: "32"
+    # #   MINICONDA: C:\Miniconda3
+
+    # - PYTHON_VERSION: "3.11"
+    #   PYTHON_ARCH: "64"
+    #   MINICONDA: C:\Miniconda3-x64
+    - PYTHON_VERSION: "3.12"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda3-x64
-
+    - PYTHON_VERSION: "3.13"
+      PYTHON_ARCH: "64"
+      MINICONDA: C:\Miniconda3-x64
 # The above commented lines has problem executing the `test_script`
 # Python >= 3.8 (32-bit)
 
