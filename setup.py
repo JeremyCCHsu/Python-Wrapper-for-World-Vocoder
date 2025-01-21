@@ -9,7 +9,7 @@ from setuptools import Extension, find_packages, setup
 from setuptools.command.build_ext import build_ext
 
 
-_VERSION = '0.3.4'
+_VERSION = '0.3.5'
 
 
 world_src_top = join("lib", "World", "src")
