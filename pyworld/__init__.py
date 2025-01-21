@@ -11,10 +11,9 @@ from __future__ import division, print_function, absolute_import
 import sys
 if sys.version_info >= (3, 8):
     from importlib.metadata import version
+    __version__ = version('pyworld')
 else:
-    from importlib_metadata import version
-
-__version__ = version('pyworld')
-
+    import pkg_resources
+    __version__ = pkg_resources.get_distribution('pyworld').version
 
 from .pyworld import *
