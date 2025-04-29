@@ -32,6 +32,7 @@ setup(
     cmdclass={'build_ext': build_ext},
     version=_VERSION,
     packages=find_packages(),
+    package_data={"": ["py.typed", "*.pyi"]},
     install_requires=['numpy'],
     extras_require={
         'test': ['nose'],
