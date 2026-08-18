@@ -32,7 +32,11 @@ setup(
     cmdclass={'build_ext': build_ext},
     version=_VERSION,
     packages=find_packages(),
-    install_requires=['numpy'],
+    package_data={"pyworld": ["py.typed", "*.pyi"]},
+    install_requires=[
+        'numpy',
+        'importlib-metadata; python_version<"3.8"',
+    ],
     extras_require={
         'test': ['nose'],
         'sdist': ['numpy', 'cython>=0.24'],

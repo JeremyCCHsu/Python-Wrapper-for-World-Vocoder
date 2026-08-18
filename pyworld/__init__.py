@@ -10,8 +10,16 @@ For more information, see https://github.com/JeremyCCHsu/Python-Wrapper-for-Worl
 
 from __future__ import division, print_function, absolute_import
 
-import pkg_resources
+import sys
 
-__version__ = pkg_resources.get_distribution('pyworld').version
+if sys.version_info >= (3, 8):
+    from importlib.metadata import version, PackageNotFoundError
+else:
+    from importlib_metadata import version, PackageNotFoundError
+
+try:
+    __version__ = version('pyworld')
+except PackageNotFoundError:
+    __version__ = '0.3.6'
 
 from .pyworld import *
