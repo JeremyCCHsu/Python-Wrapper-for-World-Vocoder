@@ -1,3 +1,7 @@
+# Do not build a feature branch that already has an open pull request
+# (otherwise every PR update triggers two identical builds).
+skip_branch_with_pr: true
+
 environment:
   TWINE_USERNAME: __token__
   TWINE_PASSWORD:
@@ -90,7 +94,9 @@ install:
   - conda update -q conda
   - conda config --add channels pypi
   - conda info -a
-  - "conda create -q -n test-environment python=%PYTHON_VERSION% numpy cython wheel matplotlib"
+  # matplotlib/Pillow are installed from PyPI in `test_script`: conda's win-64
+  # Pillow for py3.6/3.7 ships a `_imaging` DLL that fails to load.
+  - "conda create -q -n test-environment python=%PYTHON_VERSION% numpy cython wheel"
   - activate test-environment
   - python -m pip install --no-cache-dir -U pip
   - ps: |
@@ -102,7 +108,8 @@ build_script:
   - pip install -e .
 
 test_script:
-  - pip install "soundfile<0.13; python_version < '3.8'" "soundfile; python_version >= '3.8'" matplotlib
+  - pip install "soundfile<0.13; python_version < '3.8'" "soundfile; python_version >= '3.8'"
+  - "pip install --only-binary=:all: matplotlib"
   - ps: |
       Set-Location "$env:APPVEYOR_BUILD_FOLDER\demo"
       python demo.py
