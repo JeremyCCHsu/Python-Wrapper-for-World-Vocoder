@@ -102,11 +102,11 @@ build_script:
   - pip install -e .
 
 test_script:
-  - pip install soundfile matplotlib
+  - pip install "soundfile<0.13; python_version < '3.8'" "soundfile; python_version >= '3.8'" matplotlib
   - ps: |
-      $ErrorActionPreference = "Stop"
       Set-Location "$env:APPVEYOR_BUILD_FOLDER\demo"
       python demo.py
+      if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       Set-Location "$env:APPVEYOR_BUILD_FOLDER"
 
 after_test:
