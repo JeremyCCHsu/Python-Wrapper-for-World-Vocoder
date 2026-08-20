@@ -1,4 +1,5 @@
 from __future__ import division
+cimport cython
 import cython
 
 import numpy as np
@@ -11,7 +12,7 @@ cdef extern from "world/synthesis.h":
         int f0_length, const double * const *spectrogram,
         const double * const *aperiodicity,
         int fft_size, double frame_period,
-        int fs, int y_length, double *y) except + nogil
+        int fs, int y_length, double *y) nogil except +
 
 
 cdef extern from "world/cheaptrick.h":
@@ -25,7 +26,7 @@ cdef extern from "world/cheaptrick.h":
     void InitializeCheapTrickOption(int fs, CheapTrickOption *option) except +
     void CheapTrick(const double *x, int x_length, int fs, const double *temporal_positions,
         const double *f0, int f0_length, const CheapTrickOption *option,
-        double **spectrogram) except + nogil
+        double **spectrogram) nogil except +
 
 
 cdef extern from "world/dio.h":
@@ -40,7 +41,7 @@ cdef extern from "world/dio.h":
     void InitializeDioOption(DioOption *option) except +
     int GetSamplesForDIO(int fs, int x_length, double frame_period)
     void Dio(const double *x, int x_length, int fs, const DioOption *option,
-        double *temporal_positions, double *f0) except + nogil
+        double *temporal_positions, double *f0) nogil except +
 
 
 cdef extern from "world/harvest.h":
@@ -52,7 +53,7 @@ cdef extern from "world/harvest.h":
     void InitializeHarvestOption(HarvestOption *option)
     int GetSamplesForHarvest(int fs, int x_length, double frame_period)
     void Harvest(const double *x, int x_length, int fs, const HarvestOption *option,
-        double *temporal_positions, double *f0) except + nogil
+        double *temporal_positions, double *f0) nogil except +
 
 
 cdef extern from "world/d4c.h":
@@ -62,13 +63,13 @@ cdef extern from "world/d4c.h":
     void InitializeD4COption(D4COption *option) except +
     void D4C(const double *x, int x_length, int fs, const double *temporal_positions,
         const double *f0, int f0_length, int fft_size, const D4COption *option,
-        double **aperiodicity) except + nogil
+        double **aperiodicity) nogil except +
 
 
 cdef extern from "world/stonemask.h":
     void StoneMask(const double *x, int x_length, int fs,
         const double *temporal_positions, const double *f0, int f0_length,
-        double *refined_f0) except + nogil
+        double *refined_f0) nogil except +
 
 
 cdef extern from "world/codec.h":
@@ -147,7 +148,7 @@ def dio(np.ndarray[double, ndim=1, mode="c"] x not None, int fs,
         np.zeros(f0_length, dtype=np.dtype('float64'))
     cdef np.ndarray[double, ndim=1, mode="c"] temporal_positions = \
         np.zeros(f0_length, dtype=np.dtype('float64'))
-    with (nogil, cython.boundscheck(False)):
+    with nogil, cython.boundscheck(False):
         Dio(&x[0], x_length, fs, &option, &temporal_positions[0], &f0[0])
     return f0, temporal_positions
 
@@ -191,7 +192,7 @@ def harvest(np.ndarray[double, ndim=1, mode="c"] x not None, int fs,
         np.zeros(f0_length, dtype=np.dtype('float64'))
     cdef np.ndarray[double, ndim=1, mode="c"] temporal_positions = \
         np.zeros(f0_length, dtype=np.dtype('float64'))
-    with (nogil, cython.boundscheck(False)):
+    with nogil, cython.boundscheck(False):
         Harvest(&x[0], x_length, fs, &option, &temporal_positions[0], &f0[0])
     return f0, temporal_positions
 
@@ -222,7 +223,7 @@ def stonemask(np.ndarray[double, ndim=1, mode="c"] x not None,
     cdef int f0_length = <int>len(f0)
     cdef np.ndarray[double, ndim=1, mode="c"] refined_f0 = \
         np.zeros(f0_length, dtype=np.dtype('float64'))
-    with (nogil, cython.boundscheck(False)):
+    with nogil, cython.boundscheck(False):
         StoneMask(&x[0], x_length, fs, &temporal_positions[0],
             &f0[0], f0_length, &refined_f0[0])
     return refined_f0
@@ -322,7 +323,7 @@ def cheaptrick(np.ndarray[double, ndim=1, mode="c"] x not None,
     cdef np.intp_t[:] tmp = np.zeros(f0_length, dtype=np.intp)
     cdef double **cpp_spectrogram = <double**> (<void*> &tmp[0])
     cdef np.intp_t i
-    with (nogil, cython.boundscheck(False)):
+    with nogil, cython.boundscheck(False):
         for i in range(f0_length):
             cpp_spectrogram[i] = &spectrogram[i, 0]
 
@@ -390,7 +391,7 @@ def d4c(np.ndarray[double, ndim=1, mode="c"] x not None,
     cdef np.intp_t[:] tmp = np.zeros(f0_length, dtype=np.intp)
     cdef double **cpp_aperiodicity = <double**> (<void*> &tmp[0])
     cdef np.intp_t i
-    with (nogil, cython.boundscheck(False)):
+    with nogil, cython.boundscheck(False):
         for i in range(f0_length):
             cpp_aperiodicity[i] = &aperiodicity[i, 0]
 
@@ -450,7 +451,7 @@ def synthesize(np.ndarray[double, ndim=1, mode="c"] f0 not None,
     cdef double **cpp_spectrogram = <double**> (<void*> &tmp[0])
     cdef double **cpp_aperiodicity = <double**> (<void*> &tmp2[0])
     cdef np.intp_t i
-    with (nogil, cython.boundscheck(False)):
+    with nogil, cython.boundscheck(False):
         for i in range(f0_length):
             cpp_spectrogram[i] = &spectrogram0[i, 0]
             cpp_aperiodicity[i] = &aperiodicity0[i, 0]
