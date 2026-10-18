@@ -444,8 +444,6 @@ def synthesize(np.ndarray[double, ndim=1, mode="c"] f0 not None,
     cdef np.ndarray[double, ndim=1, mode="c"] y = \
         np.zeros(y_length, dtype=np.dtype('float64'))
 
-    cdef double[:, ::1] spectrogram0 = spectrogram
-    cdef double[:, ::1] aperiodicity0 = aperiodicity
     cdef np.intp_t[:] tmp = np.zeros(f0_length, dtype=np.intp)
     cdef np.intp_t[:] tmp2 = np.zeros(f0_length, dtype=np.intp)
     cdef double **cpp_spectrogram = <double**> (<void*> &tmp[0])
@@ -453,8 +451,8 @@ def synthesize(np.ndarray[double, ndim=1, mode="c"] f0 not None,
     cdef np.intp_t i
     with nogil, cython.boundscheck(False):
         for i in range(f0_length):
-            cpp_spectrogram[i] = &spectrogram0[i, 0]
-            cpp_aperiodicity[i] = &aperiodicity0[i, 0]
+            cpp_spectrogram[i] = &spectrogram[i, 0]
+            cpp_aperiodicity[i] = &aperiodicity[i, 0]
 
         Synthesis(&f0[0], f0_length, cpp_spectrogram,
             cpp_aperiodicity, fft_size, frame_period, fs, y_length, &y[0])
@@ -496,7 +494,6 @@ def code_aperiodicity(np.ndarray[double, ndim=2, mode="c"] aperiodicity, fs):
     cdef int fft_size = (<int>aperiodicity.shape[1] - 1)*2
     cdef int n_coded_aper = get_num_aperiodicities(fs)
 
-    cdef double[:, ::1] aper = aperiodicity
     cdef double[:, ::1] coded_aper = np.zeros((ap_length, n_coded_aper),
                                               dtype=np.dtype('float64'))
     cdef np.intp_t[:] tmp1 = np.zeros(ap_length, dtype=np.intp)
@@ -505,7 +502,7 @@ def code_aperiodicity(np.ndarray[double, ndim=2, mode="c"] aperiodicity, fs):
     cdef double **cpp_coded_aper = <double**> (<void*> &tmp2[0])
     cdef np.intp_t i
     for i in range(ap_length):
-        cpp_aper[i] = &aper[i, 0]
+        cpp_aper[i] = &aperiodicity[i, 0]
         cpp_coded_aper[i] = &coded_aper[i, 0]
 
     CodeAperiodicity(cpp_aper, ap_length, fs,
@@ -538,7 +535,6 @@ def decode_aperiodicity(np.ndarray[double, ndim=2, mode="c"] coded_aperiodicity,
                          '(was: {:d}, expected: {:d})'
                          .format(coded_aperiodicity.shape[1], n_coded_aper))
 
-    cdef double[:, ::1] coded_aper = coded_aperiodicity
     cdef double[:, ::1] aper = np.zeros((ap_length, fft_size//2 + 1),
                                         dtype=np.dtype('float64'))
     cdef np.intp_t[:] tmp1 = np.zeros(ap_length, dtype=np.intp)
@@ -547,7 +543,7 @@ def decode_aperiodicity(np.ndarray[double, ndim=2, mode="c"] coded_aperiodicity,
     cdef double **cpp_aper = <double**> (<void*> &tmp2[0])
     cdef np.intp_t i
     for i in range(ap_length):
-        cpp_coded_aper[i] = &coded_aper[i, 0]
+        cpp_coded_aper[i] = &coded_aperiodicity[i, 0]
         cpp_aper[i] = &aper[i, 0]
 
     DecodeAperiodicity(cpp_coded_aper, ap_length, fs, fft_size, cpp_aper)
@@ -575,7 +571,6 @@ def code_spectral_envelope(np.ndarray[double, ndim=2, mode="c"] spectrogram, fs,
     cdef int sp_length = <int>len(spectrogram)
     cdef int fft_size = (<int>spectrogram.shape[1] - 1)*2
 
-    cdef double[:, ::1] sp = spectrogram
     cdef double[:, ::1] coded_sp = np.zeros((sp_length, number_of_dimensions),
                                               dtype=np.dtype('float64'))
     cdef np.intp_t[:] tmp1 = np.zeros(sp_length, dtype=np.intp)
@@ -584,7 +579,7 @@ def code_spectral_envelope(np.ndarray[double, ndim=2, mode="c"] spectrogram, fs,
     cdef double **cpp_coded_sp = <double**> (<void*> &tmp2[0])
     cdef np.intp_t i
     for i in range(sp_length):
-        cpp_sp[i] = &sp[i, 0]
+        cpp_sp[i] = &spectrogram[i, 0]
         cpp_coded_sp[i] = &coded_sp[i, 0]
 
     CodeSpectralEnvelope(cpp_sp, sp_length, fs, fft_size,
@@ -612,7 +607,6 @@ def decode_spectral_envelope(np.ndarray[double, ndim=2, mode="c"] coded_spectral
     """
     cdef int sp_length = <int>len(coded_spectral_envelope)
     cdef int number_of_dimensions = <int>len(coded_spectral_envelope[0])
-    cdef double[:, ::1] coded_sp = coded_spectral_envelope
     cdef double[:, ::1] sp = np.zeros((sp_length, fft_size//2 + 1),
                                         dtype=np.dtype('float64'))
     cdef np.intp_t[:] tmp1 = np.zeros(sp_length, dtype=np.intp)
@@ -621,7 +615,7 @@ def decode_spectral_envelope(np.ndarray[double, ndim=2, mode="c"] coded_spectral
     cdef double **cpp_sp = <double**> (<void*> &tmp2[0])
     cdef np.intp_t i
     for i in range(sp_length):
-        cpp_coded_sp[i] = &coded_sp[i, 0]
+        cpp_coded_sp[i] = &coded_spectral_envelope[i, 0]
         cpp_sp[i] = &sp[i, 0]
 
     DecodeSpectralEnvelope(cpp_coded_sp, sp_length, fs, fft_size,
